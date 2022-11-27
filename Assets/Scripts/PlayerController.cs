@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
   public Transform cam;
   public GameObject attackSpawn;
   public GameObject fistPrefab;
+  public GameManager gamemanager;
 
   [Header("Player")]
   public float walkSpeed = 6.0f;
@@ -92,8 +93,10 @@ public class PlayerController : MonoBehaviour {
   }
 
   private void Attack() {
-    if (Input.GetMouseButtonDown(0)) {
-      Instantiate(fistPrefab, attackSpawn.transform.position, transform.rotation);
+    if (!gamemanager.isPaused) {
+      if (Input.GetMouseButtonDown(0)) {
+        Instantiate(fistPrefab, attackSpawn.transform.position, transform.rotation);
+      }
     }
   }
 }
