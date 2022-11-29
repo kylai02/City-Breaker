@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-class T2 : Building {
+class T1 : Building {
   public GameObject nextStage;
 
   protected override void CheckTier() {
-    _tier = 2;
+    _tier = 1;
+  }
+
+  protected override void ResetHealth() {
+    health = (_tier * -10) + 100;
   }
 
   protected override void Upgrade() {
-    if (_timer >= 5) {
+    if (_timer >= countdown) {
       Instantiate(nextStage, transform.position, transform.rotation);
       Destroy(gameObject);
     }

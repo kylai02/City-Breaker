@@ -5,10 +5,14 @@ using UnityEngine;
 abstract class Building : MonoBehaviour {
   protected int _tier;
   protected float _timer;
+
+  public int health;
+  public float countdown;
   
   // Start is called before the first frame update
   void Start() {
     CheckTier();
+    ResetHealth();
     _timer = 0;
   }
 
@@ -20,5 +24,6 @@ abstract class Building : MonoBehaviour {
   }
 
   protected abstract void CheckTier();
+  protected abstract void ResetHealth();
   protected abstract void Upgrade();
 }

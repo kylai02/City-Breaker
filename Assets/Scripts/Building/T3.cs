@@ -9,8 +9,12 @@ class T3 : Building {
     _tier = 3;
   }
 
+  protected override void ResetHealth() {
+    health = (_tier * -10) + 100;
+  }
+
   protected override void Upgrade() {
-    if (_timer >= 5) {
+    if (_timer >= countdown) {
       Instantiate(nextStage, transform.position, transform.rotation);
       Destroy(gameObject);
     }
