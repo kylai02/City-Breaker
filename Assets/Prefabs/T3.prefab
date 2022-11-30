@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4198502004809672365}
   m_Layer: 0
   m_Name: T3
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,5 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9e2a8753d61f0048aa563dbba821cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 5
   nextStage: {fileID: 7945704170784513058, guid: 9d581c7d560bae64b88c5cc65f2ef4fa, type: 3}
+  defaultHealth: 100
+  countdown: 5
+  experience: 50

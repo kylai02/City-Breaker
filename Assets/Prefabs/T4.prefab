@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7971658642767918226}
   m_Layer: 0
   m_Name: T4
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6563018227874927845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.11, y: 2.5, z: -5.33}
+  m_LocalPosition: {x: 12.51, y: 2.5, z: -5.33}
   m_LocalScale: {x: 2, y: 5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,5 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af5a7df55f4a764e8ca1970f31047ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 5
   nextStage: {fileID: 3394141519796729035, guid: 3eca9f2caa1825e408eab79221f67f18, type: 3}
+  defaultHealth: 100
+  countdown: 5
+  experience: 50
