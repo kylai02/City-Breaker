@@ -9,7 +9,7 @@ abstract class Building : MonoBehaviour {
 
   [Header("Building Perameters")]
   public int defaultHealth;
-  private int _health;
+  public int _health;
   public float countdown;
   public int experience;
   
@@ -28,10 +28,6 @@ abstract class Building : MonoBehaviour {
     Upgrade();
   }
 
-  public void ResetHealth(int minusHealth) {
-    _health += minusHealth;
-  }
-
   public void DealDmg(int dmg) {
     _health -= dmg;
   }
@@ -45,8 +41,13 @@ abstract class Building : MonoBehaviour {
 
   private void Upgrade() {
     if (_tier != 0 && _timer >= countdown) {
+      // Prevent to get double experience
+      experience = 0;
+
       Instantiate(nextStage, transform.position, transform.rotation);
-      nextStage.GetComponent<Building>().ResetHealth(_health - defaultHealth);
+
+      // Set nextStage's health to the remain health of this building
+      nextStage.GetComponent<Building>().DealDmg(defaultHealth - _health);
       Destroy(gameObject);
     }
   }
