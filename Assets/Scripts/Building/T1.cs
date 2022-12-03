@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 class T1 : Building {
+  public GameObject upgradeAnimation;
+
+  private bool _alreadyAlert;
+
   protected override void CheckTier() {
     _tier = 1;
+    _alreadyAlert = false;
   }
 
   private void Update() {
@@ -16,8 +21,10 @@ class T1 : Building {
   }
 
   private void ShowDangerous() {
-    if (_timer > 2) {
-      Debug.Log("Dangerous");
+    if (!_alreadyAlert && _timer > 2) {
+      upgradeAnimation.SetActive(true);
+      GameObject.Find("GameManager").GetComponent<GameManager>().Alert();
+      _alreadyAlert = true;
     }
   }
 }

@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour {
+  [Header("UI References")]
   public TMP_Text levelText;
   public Image experienceBar;
   public GameObject chooseAbility;
+  public GameObject dangerous;
 
   [Header("System Info")]
   public bool isPaused = false;
@@ -15,23 +17,19 @@ public class GameManager : MonoBehaviour {
   [Header("Player Info")]
   public LevelSystem levelSystem;
   
-    // Start is called before the first frame update
+  // Start is called before the first frame update
   void Start() {
     chooseAbility.SetActive(false);
     levelSystem = new LevelSystem();
   }
 
-    // Update is called once per frame
+  // Update is called once per frame
   void Update() {
     if (Input.GetKeyDown(KeyCode.P)) {
       PauseToggle();
     }
 
     SetLevelSystem();
-
-    if (Input.GetKeyDown(KeyCode.R)) {
-      AddExperience(30);
-    }
   }
 
   private void PauseToggle() {
@@ -48,6 +46,15 @@ public class GameManager : MonoBehaviour {
   // Level System
   public void LevelUp() {
     chooseAbility.SetActive(true);
+  }
+
+  public void Alert() {
+    dangerous.SetActive(true);
+    Invoke("CloseDangerous", 2f);
+  }
+
+  private void CloseDangerous() {
+    dangerous.SetActive(false);
   }
 
   public void AddExperience(int amount) {
