@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4729390818428455411}
+  - component: {fileID: 7010392322517819420}
   - component: {fileID: 1161426406761786180}
   - component: {fileID: 569291190239573452}
   - component: {fileID: 6826307381109337021}
-  - component: {fileID: 7010392322517819420}
   m_Layer: 0
   m_Name: T2
   m_TagString: Building
@@ -35,6 +35,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7010392322517819420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7945704170784513058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bcf3c8e361541a4293dd8eee7c62760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextStage: {fileID: 923018663480270180, guid: 76ab114a856f249488f4f7cdf5913123, type: 3}
+  defaultHealth: 100
+  health: 100
+  countdown: 5
+  experience: 50
 --- !u!33 &1161426406761786180
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -98,19 +115,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7010392322517819420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7945704170784513058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bcf3c8e361541a4293dd8eee7c62760, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextStage: {fileID: 923018663480270180, guid: 76ab114a856f249488f4f7cdf5913123, type: 3}
-  defaultHealth: 100
-  countdown: 5
-  experience: 50

@@ -9,14 +9,14 @@ abstract class Building : MonoBehaviour {
 
   [Header("Building Perameters")]
   public int defaultHealth;
-  public int _health;
+  public int health;
   public float countdown;
   public int experience;
   
   // Start is called before the first frame update
   void Start() {
     CheckTier();
-    _health = defaultHealth;
+    Debug.Log("Tier: " + _tier);
     _timer = 0;
   }
 
@@ -29,11 +29,12 @@ abstract class Building : MonoBehaviour {
   }
 
   public void DealDmg(int dmg) {
-    _health -= dmg;
+    health -= dmg;
+    Debug.Log(dmg + " " + gameObject.name);
   }
 
   private void Survive() {
-    if (_health <= 0) {
+    if (health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
       Destroy(gameObject);
     }
@@ -44,10 +45,10 @@ abstract class Building : MonoBehaviour {
       // Prevent to get double experience
       experience = 0;
 
-      Instantiate(nextStage, transform.position, transform.rotation);
+      nextStage = Instantiate(nextStage, transform.position, transform.rotation);
 
       // Set nextStage's health to the remain health of this building
-      nextStage.GetComponent<Building>().DealDmg(defaultHealth - _health);
+      nextStage.GetComponent<Building>().DealDmg(defaultHealth - health);
       Destroy(gameObject);
     }
   }
