@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 class T1 : Building {
-  protected override void CheckTier() {
-    _tier = 1;
-  }
+  public GameObject upgradeAnimation;
 
+  private bool _alreadyAlert;
+  
   private void Update() {
     _timer += Time.deltaTime;
 
@@ -15,9 +15,16 @@ class T1 : Building {
     Upgrade();
   }
 
+  protected override void CheckTier() {
+    _tier = 1;
+    _alreadyAlert = false;
+  }
+
   private void ShowDangerous() {
-    if (_timer > 2) {
-      Debug.Log("Dangerous");
+    if (!_alreadyAlert && _timer > 2) {
+      upgradeAnimation.SetActive(true);
+      GameObject.Find("GameManager").GetComponent<GameManager>().Alert();
+      _alreadyAlert = true;
     }
   }
 }

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcf3c8e361541a4293dd8eee7c62760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStage: {fileID: 923018663480270180, guid: 76ab114a856f249488f4f7cdf5913123, type: 3}
+  nextStage: {fileID: 3557349644333643133, guid: 76ab114a856f249488f4f7cdf5913123, type: 3}
   defaultHealth: 100
   health: 100
   countdown: 5
