@@ -21,6 +21,10 @@ public class FistMove : MonoBehaviour {
   }
 
   private void OnCollisionEnter(Collision other) {
+    if (other.gameObject.tag == "Building") {
+      other.gameObject.GetComponent<Building>().DealDmg(20);
+    }
+    
     Destroy(gameObject);
   }
 }
