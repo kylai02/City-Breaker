@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
   public float sprintSpeed;
   public float gravity;
   public float jumpHeight;
-  public float airMultiplier;
   public Vector3 velocity;
 
   private Vector3 _moveDirection;
@@ -60,15 +59,6 @@ public class PlayerController : MonoBehaviour {
     _moveDirection = 
       orientation.forward * _verticalInput + 
       orientation.right * _horizontalInput;
-    
-    // if (isGrounded) {
-    //   _rb.drag = groundDrag;
-    //   _rb.AddForce(_moveDirection.normalized * speed, ForceMode.Force);
-    // }
-    // else {
-    //   _rb.drag = 0;
-    //   _rb.AddForce(_moveDirection.normalized * speed * airMultiplier, ForceMode.Force);
-    // }
 
     velocity = _moveDirection * speed + _verticalVelocity;
     controller.Move(_moveDirection * speed * Time.deltaTime + _verticalVelocity * Time.deltaTime);
@@ -92,9 +82,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     _verticalVelocity.y -= gravity * Time.deltaTime;
-    // _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
-
-    // _rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
   }
 
   private void Attack() {

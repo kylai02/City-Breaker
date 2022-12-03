@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour {
   // Level System
   public void LevelUp() {
     chooseAbility.SetActive(true);
-    Debug.Log("LEVEL UP");
   }
 
   public void AddExperience(int amount) {

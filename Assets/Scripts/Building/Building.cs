@@ -31,14 +31,14 @@ abstract class Building : MonoBehaviour {
     health -= dmg;
   }
 
-  private void Survive() {
+  protected void Survive() {
     if (health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
       Destroy(gameObject);
     }
   }
 
-  private void Upgrade() {
+  protected void Upgrade() {
     if (_tier != 0 && _timer >= countdown) {
       // Prevent to get double experience
       experience = 0;
