@@ -14,11 +14,15 @@ public class LevelSystem {
   }
 
   public void AddExperience(int amount) {
-    _experience += amount;
+    if (_level != 9) {
+      _experience += amount;
 
-    if (_experience >= _experienceToNextLevel) {
-      _level++;
-      _experience -= _experienceToNextLevel;
+      if (_experience >= _experienceToNextLevel) {
+        _level++;
+        _experience -= _experienceToNextLevel;
+
+        if (_level == 9) _experience = 0;
+      }
     }
   }
 

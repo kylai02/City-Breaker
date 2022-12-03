@@ -6,18 +6,18 @@ class T1 : Building {
   public GameObject upgradeAnimation;
 
   private bool _alreadyAlert;
-
-  protected override void CheckTier() {
-    _tier = 1;
-    _alreadyAlert = false;
-  }
-
+  
   private void Update() {
     _timer += Time.deltaTime;
 
     Survive();
     ShowDangerous();
     Upgrade();
+  }
+
+  protected override void CheckTier() {
+    _tier = 1;
+    _alreadyAlert = false;
   }
 
   private void ShowDangerous() {
