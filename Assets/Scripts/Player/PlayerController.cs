@@ -3,97 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-  public CharacterController controller;
-  public Transform cam;
+  [Header("References")]
+  public GameManager gamemanager;
+  public Transform orientation;
+
   public GameObject attackSpawn;
   public GameObject fistPrefab;
-  public GameManager gamemanager;
 
-  [Header("Player")]
-  public float walkSpeed = 6.0f;
-  public float sprintSpeed = 12.0f;
+  [Header("Keybinds")]
+  public KeyCode jumpKey = KeyCode.Space;
+  private float _horizontalInput;
+  private float _verticalInput;
 
-  // Trun around head smoothly
-  public float turnSmoothTime = 0.1f;
-  private float _turnSmoothVelocity;
-  
-  public float jumpHeight = 1.5f;
-  public float gravity = -19.6f;
-  private Vector3 _verticalVelocity;
+  [Header("Movement")]
+  public float moveSpeed;
+  public float sprintSpeed;
+  public float jumpForce;
+  public float airMultiplier;
 
-  [Header("Player Grounded")]
+  private Vector3 _moveDirection;
+  private Rigidbody _rb;
+
+  [Header("Ground Check")]
   public bool isGrounded;
-
-  public Transform groundCheck;
-  public float groundDistance = 0.2f;
   public LayerMask groundMasks;
+  public float playerHeight;
+  public float groundDrag;
 
   // Start is called before the first frame update
-  void Start() {}
+  void Start() {
+    _rb = GetComponent<Rigidbody>();
+    // Prevent the player falls over
+    _rb.freezeRotation = true;
+  }
 
   // Update is called once per frame
   void Update() {
+    GetInput();
+
     // Player Movement
     GroundedCheck();
-    JumpAndGravity();
     Move();
 
     // Others
     Attack();
   }
 
-  private void Move() {
-    float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
+  private void GetInput() {
+    _horizontalInput = Input.GetAxisRaw("Horizontal");
+    _verticalInput = Input.GetAxisRaw("Vertical");
 
-    float horizontal = Input.GetAxisRaw("Horizontal");
-    float vertical = Input.GetAxisRaw("Vertical");
-    Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-    Vector3 moveDirection = new Vector3(0f, 0f, 0f);
-
-    if (direction.magnitude >= 0.1f) {
-      float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg 
-        + cam.eulerAngles.y;
-      float angle = Mathf.SmoothDampAngle(
-        transform.eulerAngles.y, 
-        targetAngle, 
-        ref _turnSmoothVelocity, 
-        turnSmoothTime
-      );
-      transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-      moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+    if (Input.GetKeyDown(jumpKey) && isGrounded) {
+      Jump();
     }
+  }
 
-    controller.Move(
-      moveDirection.normalized * speed * Time.deltaTime + 
-      _verticalVelocity * Time.deltaTime
-    );
+  private void Move() {
+    float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
+
+    _moveDirection = 
+      orientation.forward * _verticalInput + 
+      orientation.right * _horizontalInput;
+    
+    if (isGrounded) {
+      _rb.drag = groundDrag;
+      _rb.AddForce(_moveDirection.normalized * speed, ForceMode.Force);
+    }
+    else {
+      _rb.drag = 0;
+      _rb.AddForce(_moveDirection.normalized * speed * airMultiplier, ForceMode.Force);
+    }
   }
 
   private void GroundedCheck() {
-    isGrounded = Physics.CheckSphere(
-      groundCheck.position,
-      groundDistance,
+    isGrounded = Physics.Raycast(
+      transform.position, 
+      Vector3.down, 
+      playerHeight * 0.5f + 0.2f, 
       groundMasks
     );
   }
 
-  private void JumpAndGravity() {
-    if (isGrounded && _verticalVelocity.y < 0) {
-      _verticalVelocity.y = -2f;
-    }
+  private void Jump() {
+    _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
 
-    if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
-      _verticalVelocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
-    }
-
-    _verticalVelocity.y += gravity * Time.deltaTime;
+    _rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
   }
 
   private void Attack() {
     if (!gamemanager.isPaused) {
       if (Input.GetMouseButtonDown(0)) {
-        Instantiate(fistPrefab, attackSpawn.transform.position, transform.rotation);
+        Instantiate(fistPrefab, attackSpawn.transform.position, attackSpawn.transform.rotation);
       }
     }
   }
