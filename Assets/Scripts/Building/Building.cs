@@ -16,7 +16,6 @@ abstract class Building : MonoBehaviour {
   // Start is called before the first frame update
   void Start() {
     CheckTier();
-    Debug.Log("Tier: " + _tier);
     _timer = 0;
   }
 
@@ -30,7 +29,6 @@ abstract class Building : MonoBehaviour {
 
   public void DealDmg(int dmg) {
     health -= dmg;
-    Debug.Log(dmg + " " + gameObject.name);
   }
 
   private void Survive() {

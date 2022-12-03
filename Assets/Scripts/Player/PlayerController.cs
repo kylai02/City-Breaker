@@ -3,33 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-  public CharacterController controller;
-  public Transform cam;
-  public GameObject attackSpawn;
-  public GameObject fistPrefab;
+  [Header("References")]
   public GameManager gamemanager;
+  public Transform orientation;
+  public CharacterController controller;
 
-  [Header("Player")]
-  public float walkSpeed = 6.0f;
-  public float sprintSpeed = 12.0f;
+  [Header("Keybinds")]
+  public KeyCode jumpKey = KeyCode.Space;
 
-  // Trun around head smoothly
-  public float turnSmoothTime = 0.1f;
-  private float _turnSmoothVelocity;
-  
-  public float jumpHeight = 1.5f;
-  public float gravity = -19.6f;
+  private float _horizontalInput;
+  private float _verticalInput;
+
+  [Header("Movement")]
+  public float moveSpeed;
+  public float sprintSpeed;
+  public float gravity;
+  public float jumpHeight;
+  public float airMultiplier;
+  public Vector3 velocity;
+
+  private Vector3 _moveDirection;
   private Vector3 _verticalVelocity;
 
-  [Header("Player Grounded")]
+  [Header("Ground Check")]
   public bool isGrounded;
-
-  public Transform groundCheck;
-  public float groundDistance = 0.2f;
   public LayerMask groundMasks;
+  public float playerHeight;
+  public float groundDrag;
+
+  [Header("Attack")]
+  public GameObject attackSpawn;
+  public GameObject fistPrefab;
 
   // Start is called before the first frame update
-  void Start() {}
+  void Start() {
+    _verticalVelocity = new Vector3(0f, 0f, 0f);
+  }
 
   // Update is called once per frame
   void Update() {
@@ -43,37 +52,33 @@ public class PlayerController : MonoBehaviour {
   }
 
   private void Move() {
-    float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
+    float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
 
-    float horizontal = Input.GetAxisRaw("Horizontal");
-    float vertical = Input.GetAxisRaw("Vertical");
-    Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-    Vector3 moveDirection = new Vector3(0f, 0f, 0f);
+    _horizontalInput = Input.GetAxisRaw("Horizontal");
+    _verticalInput = Input.GetAxisRaw("Vertical");
 
-    if (direction.magnitude >= 0.1f) {
-      float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg 
-        + cam.eulerAngles.y;
-      float angle = Mathf.SmoothDampAngle(
-        transform.eulerAngles.y, 
-        targetAngle, 
-        ref _turnSmoothVelocity, 
-        turnSmoothTime
-      );
-      transform.rotation = Quaternion.Euler(0f, angle, 0f);
+    _moveDirection = 
+      orientation.forward * _verticalInput + 
+      orientation.right * _horizontalInput;
+    
+    // if (isGrounded) {
+    //   _rb.drag = groundDrag;
+    //   _rb.AddForce(_moveDirection.normalized * speed, ForceMode.Force);
+    // }
+    // else {
+    //   _rb.drag = 0;
+    //   _rb.AddForce(_moveDirection.normalized * speed * airMultiplier, ForceMode.Force);
+    // }
 
-      moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-    }
-
-    controller.Move(
-      moveDirection.normalized * speed * Time.deltaTime + 
-      _verticalVelocity * Time.deltaTime
-    );
+    velocity = _moveDirection * speed + _verticalVelocity;
+    controller.Move(_moveDirection * speed * Time.deltaTime + _verticalVelocity * Time.deltaTime);
   }
 
   private void GroundedCheck() {
-    isGrounded = Physics.CheckSphere(
-      groundCheck.position,
-      groundDistance,
+    isGrounded = Physics.Raycast(
+      transform.position, 
+      Vector3.down, 
+      playerHeight * 0.5f + 0.2f, 
       groundMasks
     );
   }
@@ -82,18 +87,20 @@ public class PlayerController : MonoBehaviour {
     if (isGrounded && _verticalVelocity.y < 0) {
       _verticalVelocity.y = -2f;
     }
-
-    if (isGrounded && Input.GetKeyDown(KeyCode.Space)) {
-      _verticalVelocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
+    if (Input.GetKeyDown(jumpKey) && isGrounded) {
+      _verticalVelocity.y += Mathf.Sqrt(jumpHeight * 2 * gravity);
     }
 
-    _verticalVelocity.y += gravity * Time.deltaTime;
+    _verticalVelocity.y -= gravity * Time.deltaTime;
+    // _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+
+    // _rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
   }
 
   private void Attack() {
     if (!gamemanager.isPaused) {
       if (Input.GetMouseButtonDown(0)) {
-        Instantiate(fistPrefab, attackSpawn.transform.position, transform.rotation);
+        Instantiate(fistPrefab, attackSpawn.transform.position, attackSpawn.transform.rotation);
       }
     }
   }
