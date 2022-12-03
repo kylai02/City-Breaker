@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_MaxSpeed: 500
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -2177,7 +2177,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.22113726, y: 0.00000003356079, z: -0.000000007609943, w: 0.97524273}
+  m_LocalRotation: {x: 0.22113726, y: -0.00000003356079, z: 0.000000007609943, w: 0.97524273}
   m_LocalPosition: {x: 0, y: 4.8, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3936,7 +3936,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798234693}
-  m_LocalRotation: {x: 0.24127485, y: -0.000000008349025, z: 0.0000000020757336, w: 0.97045684}
+  m_LocalRotation: {x: 0.24127485, y: 0.0000000083490255, z: -0.0000000020757338, w: 0.97045684}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4181,7 +4181,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904082753}
-  m_LocalRotation: {x: 0.20097417, y: 0.000000016855306, z: -0.000000003458037, w: 0.97959656}
+  m_LocalRotation: {x: 0.20097417, y: -0.000000016855319, z: 0.0000000034580396, w: 0.97959656}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4259,7 +4259,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959070604}
-  m_LocalRotation: {x: 0.22113724, y: 0.000000008390197, z: -0.0000000019024855, w: 0.97524273}
+  m_LocalRotation: {x: 0.22113724, y: -0.000000008390197, z: 0.0000000019024855, w: 0.97524273}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4454,7 +4454,6 @@ GameObject:
   - component: {fileID: 2028610699}
   - component: {fileID: 2028610701}
   - component: {fileID: 2028610700}
-  - component: {fileID: 2028610702}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -4493,19 +4492,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gamemanager: {fileID: 1981251690}
   orientation: {fileID: 1151226260}
-  attackSpawn: {fileID: 276851830}
-  fistPrefab: {fileID: 2125021213631625096, guid: 678ab4493a13dca4b94faf02ea44d9c4, type: 3}
+  controller: {fileID: 2028610701}
   jumpKey: 32
   moveSpeed: 7
   sprintSpeed: 10
-  jumpForce: 7
+  gravity: 19.8
+  jumpHeight: 3
   airMultiplier: 0.1
+  velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
   groundMasks:
     serializedVersion: 2
     m_Bits: 65
-  playerHeight: 2
+  playerHeight: 1
   groundDrag: 3
+  attackSpawn: {fileID: 276851830}
+  fistPrefab: {fileID: 2125021213631625096, guid: 678ab4493a13dca4b94faf02ea44d9c4, type: 3}
 --- !u!143 &2028610701
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4524,22 +4526,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2028610702
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028610698}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2082341542
 GameObject:
   m_ObjectHideFlags: 0

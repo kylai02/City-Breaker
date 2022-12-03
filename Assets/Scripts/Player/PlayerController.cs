@@ -6,23 +6,24 @@ public class PlayerController : MonoBehaviour {
   [Header("References")]
   public GameManager gamemanager;
   public Transform orientation;
-
-  public GameObject attackSpawn;
-  public GameObject fistPrefab;
+  public CharacterController controller;
 
   [Header("Keybinds")]
   public KeyCode jumpKey = KeyCode.Space;
+
   private float _horizontalInput;
   private float _verticalInput;
 
   [Header("Movement")]
   public float moveSpeed;
   public float sprintSpeed;
-  public float jumpForce;
+  public float gravity;
+  public float jumpHeight;
   public float airMultiplier;
+  public Vector3 velocity;
 
   private Vector3 _moveDirection;
-  private Rigidbody _rb;
+  private Vector3 _verticalVelocity;
 
   [Header("Ground Check")]
   public bool isGrounded;
@@ -30,49 +31,47 @@ public class PlayerController : MonoBehaviour {
   public float playerHeight;
   public float groundDrag;
 
+  [Header("Attack")]
+  public GameObject attackSpawn;
+  public GameObject fistPrefab;
+
   // Start is called before the first frame update
   void Start() {
-    _rb = GetComponent<Rigidbody>();
-    // Prevent the player falls over
-    _rb.freezeRotation = true;
+    _verticalVelocity = new Vector3(0f, 0f, 0f);
   }
 
   // Update is called once per frame
   void Update() {
-    GetInput();
-
     // Player Movement
     GroundedCheck();
+    JumpAndGravity();
     Move();
 
     // Others
     Attack();
   }
 
-  private void GetInput() {
-    _horizontalInput = Input.GetAxisRaw("Horizontal");
-    _verticalInput = Input.GetAxisRaw("Vertical");
-
-    if (Input.GetKeyDown(jumpKey) && isGrounded) {
-      Jump();
-    }
-  }
-
   private void Move() {
     float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : moveSpeed;
+
+    _horizontalInput = Input.GetAxisRaw("Horizontal");
+    _verticalInput = Input.GetAxisRaw("Vertical");
 
     _moveDirection = 
       orientation.forward * _verticalInput + 
       orientation.right * _horizontalInput;
     
-    if (isGrounded) {
-      _rb.drag = groundDrag;
-      _rb.AddForce(_moveDirection.normalized * speed, ForceMode.Force);
-    }
-    else {
-      _rb.drag = 0;
-      _rb.AddForce(_moveDirection.normalized * speed * airMultiplier, ForceMode.Force);
-    }
+    // if (isGrounded) {
+    //   _rb.drag = groundDrag;
+    //   _rb.AddForce(_moveDirection.normalized * speed, ForceMode.Force);
+    // }
+    // else {
+    //   _rb.drag = 0;
+    //   _rb.AddForce(_moveDirection.normalized * speed * airMultiplier, ForceMode.Force);
+    // }
+
+    velocity = _moveDirection * speed + _verticalVelocity;
+    controller.Move(_moveDirection * speed * Time.deltaTime + _verticalVelocity * Time.deltaTime);
   }
 
   private void GroundedCheck() {
@@ -84,10 +83,18 @@ public class PlayerController : MonoBehaviour {
     );
   }
 
-  private void Jump() {
-    _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+  private void JumpAndGravity() {
+    if (isGrounded && _verticalVelocity.y < 0) {
+      _verticalVelocity.y = -2f;
+    }
+    if (Input.GetKeyDown(jumpKey) && isGrounded) {
+      _verticalVelocity.y += Mathf.Sqrt(jumpHeight * 2 * gravity);
+    }
 
-    _rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    _verticalVelocity.y -= gravity * Time.deltaTime;
+    // _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
+
+    // _rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
   }
 
   private void Attack() {
