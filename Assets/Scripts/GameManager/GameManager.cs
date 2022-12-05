@@ -6,6 +6,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
   [Header("UI References")]
+  public GameObject inGame;
+  public GameObject pauseGame;
+  public GameObject gameOver;
   // Text of levelNum, on the experienceBar 
   public TMP_Text levelText;
   // Bar of exp, on the left top
@@ -42,6 +45,13 @@ public class GameManager : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     if (Input.GetKeyDown(KeyCode.P)) {
+      if (isPaused) {
+        KeepGoing();
+      }
+      else {
+        PauseMenu();
+      }
+
       PauseToggle();
     }
 
@@ -78,6 +88,22 @@ public class GameManager : MonoBehaviour {
     PauseToggle();
     chooseAbility.SetActive(false);
     CursorToggle();
+  }
+
+  public void GameOver() {
+    gameOver.SetActive(true);
+    inGame.SetActive(false);
+    PauseToggle();
+  }
+
+  private void PauseMenu() {
+    inGame.SetActive(false);
+    pauseGame.SetActive(true);
+  }
+
+  private void KeepGoing() {
+    pauseGame.SetActive(false);
+    inGame.SetActive(true);
   }
 
   private void PauseToggle() {
