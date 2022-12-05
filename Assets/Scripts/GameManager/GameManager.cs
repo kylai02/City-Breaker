@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
     }
 
     chosenSkill = 0;
-    GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
+    // GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
   }
 
   // Update is called once per frame
@@ -62,12 +62,13 @@ public class GameManager : MonoBehaviour {
 
       PauseToggle();
     }
-
-    if (Input.GetKeyDown(KeyCode.Q)) {
+    
+    float mouseCenter = Input.GetAxis("Mouse ScrollWheel");
+    if (Input.GetKeyDown(KeyCode.Q) || mouseCenter < 0) {
       ChangeSkill(-1);
     }
 
-    if (Input.GetKeyDown(KeyCode.E)) {
+    if (Input.GetKeyDown(KeyCode.E) || mouseCenter > 0) {
       ChangeSkill(1);
     }
 

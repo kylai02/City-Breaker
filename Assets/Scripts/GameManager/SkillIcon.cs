@@ -10,10 +10,10 @@ public class SkillIcon : MonoBehaviour {
   public Vector2 defaultScale;
   // Start is called before the first frame update
   void Start() {
+    enlargement = new Vector2(125f, 125f);
     _rt = gameObject.GetComponent<RectTransform>();
     num = gameObject.name[6] - '0';
     defaultScale = _rt.sizeDelta;
-    enlargement = new Vector2(125f, 125f);
   }
 
   // Update is called once per frame
