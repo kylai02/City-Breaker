@@ -6,6 +6,10 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
   [Header("UI References")]
+  public GameObject inGame;
+  public GameObject pauseGame;
+  public GameObject gameOver;
+
   // Text of levelNum, on the experienceBar 
   public TMP_Text levelText;
   // Bar of exp, on the left top
@@ -14,6 +18,8 @@ public class GameManager : MonoBehaviour {
   public GameObject chooseAbility;
   // Alert of T1 to T0
   public GameObject dangerous;
+
+  public int chosenSkill;
 
   [Header("System Info")]
   // Whether the game is paused
@@ -36,20 +42,53 @@ public class GameManager : MonoBehaviour {
     abilitySystem = new AbilitySystem();
 
     _chosenArea = new List<int>(3);
-    for (int i = 0; i < 3; ++i) _chosenArea.Add(-1);
+    for (int i = 0; i < 3; ++i) {
+      _chosenArea.Add(-1);
+    }
+
+    chosenSkill = 0;
+    // GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
   }
 
   // Update is called once per frame
   void Update() {
     if (Input.GetKeyDown(KeyCode.P)) {
+      if (isPaused) {
+        KeepGoing();
+      }
+      else {
+        PauseMenu();
+      }
+
       PauseToggle();
+    }
+    
+    float mouseCenter = Input.GetAxis("Mouse ScrollWheel");
+    if (Input.GetKeyDown(KeyCode.Q) || mouseCenter < 0) {
+      ChangeSkill(-1);
+    }
+
+    if (Input.GetKeyDown(KeyCode.E) || mouseCenter > 0) {
+      ChangeSkill(1);
     }
 
     if (Input.GetKeyDown(KeyCode.R)) {
       AddExperience(50);
     }
 
+
     SetLevelSystem();
+  }
+
+  public void ChangeSkill(int parameter) {
+    int preSkill = chosenSkill;
+    chosenSkill += parameter;
+
+    if (chosenSkill > 4) chosenSkill = 0;
+    if (chosenSkill < 0) chosenSkill = 4;
+
+    GameObject.Find("Skill " + preSkill).GetComponent<SkillIcon>().UnChosen();
+    GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
   }
 
   // Alert for T1 to T0
@@ -78,6 +117,22 @@ public class GameManager : MonoBehaviour {
     PauseToggle();
     chooseAbility.SetActive(false);
     CursorToggle();
+  }
+
+  public void GameOver() {
+    gameOver.SetActive(true);
+    inGame.SetActive(false);
+    PauseToggle();
+  }
+
+  private void PauseMenu() {
+    inGame.SetActive(false);
+    pauseGame.SetActive(true);
+  }
+
+  private void KeepGoing() {
+    pauseGame.SetActive(false);
+    inGame.SetActive(true);
   }
 
   private void PauseToggle() {
