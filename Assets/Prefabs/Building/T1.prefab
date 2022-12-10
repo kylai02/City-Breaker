@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8091342173226584466}
   - component: {fileID: 719003800916706819}
   - component: {fileID: 6982508395880615347}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4887,7 +4887,7 @@ GameObject:
   - component: {fileID: 5380999799384455231}
   - component: {fileID: 5332270422359193436}
   - component: {fileID: 3472953324492991836}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 02_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9727,7 +9727,7 @@ GameObject:
   - component: {fileID: 4953909171394254754}
   - component: {fileID: 3712654721817756169}
   - component: {fileID: 3533935567295558184}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14437,7 +14437,7 @@ GameObject:
   - component: {fileID: 4278970708007406772}
   - component: {fileID: 971603570884357966}
   - component: {fileID: 9073780358665275596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19222,7 +19222,7 @@ GameObject:
   - component: {fileID: 2457530781727755162}
   - component: {fileID: 3896036675561633604}
   - component: {fileID: 3127926435813906985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: T1
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -19258,11 +19258,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStage: {fileID: 7303281401102613135, guid: c42ccad2f38b4694d82c3790e8aca112, type: 3}
+  _timer: 0
   defaultHealth: 100
   health: 100
-  countdown: 5
+  countdown: 1000
   experience: 50
-  gameManager: {fileID: 0}
   upgradeAnimation: {fileID: 7473680876956476327}
 --- !u!33 &2457530781727755162
 MeshFilter:
@@ -19338,7 +19338,7 @@ GameObject:
   - component: {fileID: 6923147430242052665}
   - component: {fileID: 2683731220950875471}
   - component: {fileID: 7937003075609306209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: magic_ring_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24160,7 +24160,7 @@ GameObject:
   - component: {fileID: 3626410692759147171}
   - component: {fileID: 7430225600269904535}
   - component: {fileID: 3435844206678040070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 01_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
