@@ -46,8 +46,6 @@ public class PlayerController : MonoBehaviour {
     JumpAndGravity();
     Move();
 
-    // Others
-    Attack();
   }
 
   private void Move() {
@@ -82,13 +80,5 @@ public class PlayerController : MonoBehaviour {
     }
 
     _verticalVelocity.y -= gravity * Time.deltaTime;
-  }
-
-  private void Attack() {
-    if (!gamemanager.isPaused) {
-      if (Input.GetMouseButtonDown(0)) {
-        Instantiate(fistPrefab, attackSpawn.transform.position, attackSpawn.transform.rotation);
-      }
-    }
   }
 }

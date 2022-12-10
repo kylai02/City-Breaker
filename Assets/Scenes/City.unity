@@ -728,8 +728,12 @@ PrefabInstance:
       value: T4 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6563018227874927845, guid: 3f87de70d28b97346b67027d837f7f17, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6563018227874927845, guid: 3f87de70d28b97346b67027d837f7f17, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6563018227874927848, guid: 3f87de70d28b97346b67027d837f7f17, type: 3}
       propertyPath: m_RootOrder
@@ -1631,8 +1635,12 @@ PrefabInstance:
       value: T3
       objectReference: {fileID: 0}
     - target: {fileID: 3394141519796729035, guid: 3eca9f2caa1825e408eab79221f67f18, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3394141519796729035, guid: 3eca9f2caa1825e408eab79221f67f18, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3394141519796729039, guid: 3eca9f2caa1825e408eab79221f67f18, type: 3}
       propertyPath: m_RootOrder
@@ -2494,7 +2502,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.22113726, y: -0.00000003356079, z: 0.000000007609943, w: 0.97524273}
+  m_LocalRotation: {x: 0.22113726, y: 0.00000003356079, z: -0.000000007609943, w: 0.97524273}
   m_LocalPosition: {x: 0, y: 4.8, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5181,7 +5189,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1798234693}
-  m_LocalRotation: {x: 0.24127485, y: -0.0000000083490255, z: 0.0000000020757338, w: 0.97045684}
+  m_LocalRotation: {x: 0.24127485, y: 0.000000008349025, z: -0.0000000020757336, w: 0.97045684}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5426,7 +5434,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904082753}
-  m_LocalRotation: {x: 0.20097417, y: 0.000000016855306, z: -0.000000003458037, w: 0.97959656}
+  m_LocalRotation: {x: 0.20097417, y: -0.000000016855319, z: 0.0000000034580396, w: 0.97959656}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5504,7 +5512,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959070604}
-  m_LocalRotation: {x: 0.22113724, y: -0.0000000083902005, z: 0.0000000019024864, w: 0.97524273}
+  m_LocalRotation: {x: 0.22113724, y: 0.0000000083902005, z: -0.0000000019024864, w: 0.97524273}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5704,6 +5712,9 @@ GameObject:
   - component: {fileID: 2028610699}
   - component: {fileID: 2028610701}
   - component: {fileID: 2028610700}
+  - component: {fileID: 2028610703}
+  - component: {fileID: 2028610704}
+  - component: {fileID: 2028610705}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5775,6 +5786,66 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2028610703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028610698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02519feee2159b44880ec5f3756b619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpawn: {fileID: 276851831}
+  gameManager: {fileID: 1981251690}
+  attackKey: 102
+  coolDown: 0.2
+  skillNumber: 0
+  fistPrefab: {fileID: 2125021213631625096, guid: 678ab4493a13dca4b94faf02ea44d9c4, type: 3}
+  speed: 10
+  lifetime: 0.25
+--- !u!114 &2028610704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028610698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06dfaa48032b6fe4aa63df310f4dc191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpawn: {fileID: 276851831}
+  gameManager: {fileID: 1981251690}
+  attackKey: 102
+  coolDown: 2
+  skillNumber: 1
+  acidBombPrefab: {fileID: 8744123816993108407, guid: 679bee16f0928204386e7911a7064777, type: 3}
+  cam: {fileID: 963194228}
+  throwForce: 10
+  throwUpwardForce: 10
+--- !u!114 &2028610705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028610698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93c1c33a076273e40a33cf4e75b0274a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpawn: {fileID: 276851831}
+  gameManager: {fileID: 1981251690}
+  attackKey: 102
+  coolDown: 30
+  skillNumber: 2
+  acidCloudPrefab: {fileID: 6491546520562213622, guid: 0b4a4d230d991404ca03e25088e11936, type: 3}
+  lifetime: 30
 --- !u!1 &2058594690
 GameObject:
   m_ObjectHideFlags: 0
