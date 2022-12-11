@@ -5,9 +5,9 @@ using UnityEngine;
 public class AcidBombAddon : MonoBehaviour {
   [Header("Settings")]
   public LayerMask buildingLayer;
-  public int directDamage;
-  public int sputteringDamege;
-  public int sputteringRadius;
+  public float directDamage;
+  public float sputteringDamege;
+  public float sputteringRadius;
   
 
   // Start is called before the first frame update

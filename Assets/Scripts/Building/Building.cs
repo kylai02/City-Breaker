@@ -8,8 +8,8 @@ abstract class Building : MonoBehaviour {
   protected float _timer;
 
   [Header("Settings")]
-  public int defaultHealth;
-  public int health;
+  public float defaultHealth;
+  public float health;
   public float countdown;
   public int experience;
   
@@ -17,6 +17,7 @@ abstract class Building : MonoBehaviour {
   public bool onFire;
   public float corrodeTimer;
   public float fireTimer;
+  public float fireDamage;
   
   // Start is called before the first frame update
   void Start() {
@@ -32,16 +33,17 @@ abstract class Building : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     OnCorrodeCheck();
+    OnFireCheck();
 
     Survive();
     Upgrade();
   }
 
-  public void DealDmg(int dmg) {
+  public void DealDmg(float dmg) {
     health -= dmg;
   }
 
-  private void OnCorrodeCheck() {
+  protected void OnCorrodeCheck() {
     if (!onCorrode) {
       _timer += Time.deltaTime;
     }
@@ -51,6 +53,16 @@ abstract class Building : MonoBehaviour {
 
     if (corrodeTimer <= 0) {
       onCorrode = false;
+    }
+  }
+
+  protected void OnFireCheck() {
+    if (onFire) {
+      fireTimer -= Time.deltaTime;
+      DealDmg(fireDamage * Time.deltaTime);
+    }
+    if (fireTimer <= 0) {
+      onFire = false;
     }
   }
 

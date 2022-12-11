@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FistAddon : MonoBehaviour {
   [Header("Settings")]
-  public int damage;
+  public float damage;
 
   // Start is called before the first frame update
   void Start() {

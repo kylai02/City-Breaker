@@ -48,11 +48,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStage: {fileID: 7303281401102613135}
-  _timer: 0
   defaultHealth: 100
   health: 100
   countdown: 5
   experience: 50
+  onCorrode: 0
+  onFire: 0
+  corrodeTimer: 0
+  fireTimer: 0
+  fireDamage: 20
 --- !u!33 &8965931315319773767
 MeshFilter:
   m_ObjectHideFlags: 0

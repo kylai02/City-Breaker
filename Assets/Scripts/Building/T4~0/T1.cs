@@ -8,7 +8,8 @@ class T1 : Building {
   private bool _alreadyAlert;
   
   private void Update() {
-    _timer += Time.deltaTime;
+    OnCorrodeCheck();
+    OnFireCheck();
 
     Survive();
     ShowDangerous();
