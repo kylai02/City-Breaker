@@ -215,6 +215,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1106420}
   m_CullTransparentMesh: 1
+--- !u!1 &14605147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 14605148}
+  - component: {fileID: 14605149}
+  m_Layer: 3
+  m_Name: FanFlame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &14605148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14605147}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 276851831}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &14605149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14605147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5752d5a1b49886948a32a45c59a020a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 5
+  accurate: 10
+  attackAngle: 90
 --- !u!1 &39936015
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +855,9 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.0039999485, z: 1.043}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 14605148}
+  - {fileID: 816281355}
   m_Father: {fileID: 1577172952}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2349,6 +2398,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &816281354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 816281355}
+  - component: {fileID: 816281356}
+  m_Layer: 3
+  m_Name: FireLaser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &816281355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816281354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 276851831}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &816281356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816281354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a312207f06788d4dae0d4b708189da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 5
+  damage: 200
 --- !u!1 &948661832
 GameObject:
   m_ObjectHideFlags: 0
@@ -5715,6 +5810,8 @@ GameObject:
   - component: {fileID: 2028610703}
   - component: {fileID: 2028610704}
   - component: {fileID: 2028610705}
+  - component: {fileID: 2028610706}
+  - component: {fileID: 2028610707}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5846,6 +5943,44 @@ MonoBehaviour:
   skillNumber: 2
   acidCloudPrefab: {fileID: 6491546520562213622, guid: 0b4a4d230d991404ca03e25088e11936, type: 3}
   lifetime: 30
+--- !u!114 &2028610706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028610698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d51e19c83aaa034889141f766001b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpawn: {fileID: 276851831}
+  gameManager: {fileID: 1981251690}
+  attackKey: 102
+  coolDown: 5
+  skillNumber: 3
+  fanFlame: {fileID: 14605147}
+  attackDuration: 1
+--- !u!114 &2028610707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028610698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0690cd9a36c554d87c2e2a51da8e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpawn: {fileID: 276851831}
+  gameManager: {fileID: 1981251690}
+  attackKey: 102
+  coolDown: 5
+  skillNumber: 4
+  fireLaser: {fileID: 816281354}
+  attackDuration: 2
 --- !u!1 &2058594690
 GameObject:
   m_ObjectHideFlags: 0

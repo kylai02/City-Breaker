@@ -19258,11 +19258,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStage: {fileID: 7303281401102613135, guid: c42ccad2f38b4694d82c3790e8aca112, type: 3}
-  _timer: 0
   defaultHealth: 100
   health: 100
   countdown: 1000
   experience: 50
+  onCorrode: 0
+  onFire: 0
+  corrodeTimer: 0
+  fireTimer: 0
+  fireDamage: 20
   upgradeAnimation: {fileID: 7473680876956476327}
 --- !u!33 &2457530781727755162
 MeshFilter:
