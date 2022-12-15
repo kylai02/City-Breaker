@@ -14,6 +14,7 @@ public class AbilitySystem {
 
   public void Acquired(int index) {
     _acquiredAbility[index] = true;
+    // Use ability function
   }
 
   public bool isAcquired(int index) {

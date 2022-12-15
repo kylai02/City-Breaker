@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// The Skill choose UI on the bottom of screen
 public class SkillIcon : MonoBehaviour {
   private RectTransform _rt;
   
@@ -12,6 +13,7 @@ public class SkillIcon : MonoBehaviour {
   void Start() {
     enlargement = new Vector2(125f, 125f);
     _rt = gameObject.GetComponent<RectTransform>();
+    // gameObject.name = "Skill n"
     num = gameObject.name[6] - '0';
     defaultScale = _rt.sizeDelta;
   }
