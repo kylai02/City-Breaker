@@ -44,6 +44,14 @@ public class LevelSystem {
     return _level;
   }
 
+  public int GetExperience() {
+    return _experience;
+  }
+
+  public int GetExperienceToNextLevel() {
+    return _experienceToNextLevel;
+  }
+
   public float GetExperienceNormalized() {
     return (float)_experience / _experienceToNextLevel;
   }
