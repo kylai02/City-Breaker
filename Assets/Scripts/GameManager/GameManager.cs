@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour {
     }
 
     if (Input.GetKeyDown(KeyCode.R)) {
-      AddExperience(50);
+      AddExperience(1000);
     }
 
 
