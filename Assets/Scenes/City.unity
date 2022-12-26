@@ -347,13 +347,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 128
+  m_fontSizeBase: 128
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 78596772}
   - component: {fileID: 78596771}
   m_Layer: 5
-  m_Name: AbilityC
+  m_Name: Skill 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1981251690}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChooseAbility
+        m_MethodName: ChooseSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1447,13 +1447,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 128
+  m_fontSizeBase: 128
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2597,7 +2597,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.22113726, y: 0.00000003356079, z: -0.000000007609943, w: 0.97524273}
+  m_LocalRotation: {x: 0.22113726, y: -0.00000003356079, z: 0.000000007609943, w: 0.97524273}
   m_LocalPosition: {x: 0, y: 4.8, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3357,13 +3357,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 128
+  m_fontSizeBase: 128
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4298,7 +4298,7 @@ GameObject:
   - component: {fileID: 1667562480}
   - component: {fileID: 1667562479}
   m_Layer: 5
-  m_Name: AbilityB
+  m_Name: Skill 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4371,7 +4371,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1981251690}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChooseAbility
+        m_MethodName: ChooseSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5529,7 +5529,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904082753}
-  m_LocalRotation: {x: 0.20097417, y: -0.000000016855319, z: 0.0000000034580396, w: 0.97959656}
+  m_LocalRotation: {x: 0.20097417, y: 0.000000016855306, z: -0.000000003458037, w: 0.97959656}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5607,7 +5607,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959070604}
-  m_LocalRotation: {x: 0.22113724, y: 0.0000000083902005, z: -0.0000000019024864, w: 0.97524273}
+  m_LocalRotation: {x: 0.22113724, y: -0.000000008390197, z: 0.0000000019024855, w: 0.97524273}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5792,7 +5792,7 @@ MonoBehaviour:
   gameOver: {fileID: 1193147488}
   levelText: {fileID: 1719522911}
   experienceBar: {fileID: 948661834}
-  chooseAbility: {fileID: 2082341542}
+  chooseSkill: {fileID: 2082341542}
   dangerous: {fileID: 246574472}
   chosenSkill: 0
   isPaused: 0
@@ -5903,6 +5903,7 @@ MonoBehaviour:
   fistPrefab: {fileID: 2125021213631625096, guid: 678ab4493a13dca4b94faf02ea44d9c4, type: 3}
   speed: 10
   lifetime: 0.25
+  damage: 30
 --- !u!114 &2028610704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6099,7 +6100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2082341543}
   m_Layer: 5
-  m_Name: ChooseAbility
+  m_Name: ChooseSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6141,7 +6142,7 @@ GameObject:
   - component: {fileID: 2095437987}
   - component: {fileID: 2095437986}
   m_Layer: 5
-  m_Name: AbilityA
+  m_Name: Skill 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6214,7 +6215,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1981251690}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ChooseAbility
+        m_MethodName: ChooseSkill
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

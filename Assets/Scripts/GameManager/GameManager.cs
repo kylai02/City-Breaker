@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour {
   public TMP_Text levelText;
   // Bar of exp, on the left top
   public Image experienceBar;
-  // Buttons for choose ability
-  public GameObject chooseAbility;
+  // Buttons for choose skill
+  public GameObject chooseSkill;
   // Alert of T1 to T0
   public GameObject dangerous;
 
@@ -28,18 +28,19 @@ public class GameManager : MonoBehaviour {
   [Header("Player Info")]
   // Maintain a Level System
   public LevelSystem levelSystem;
-  // Maintain a Ability System
-  public AbilitySystem abilitySystem;
+  // Maintain a Skill System
+  public SkillSystem skillSystem;
 
   // Tmp for choose ability's index
   private List<int> _chosenArea;
   
   // Start is called before the first frame update
   void Start() {
-    chooseAbility.SetActive(false);
+    Restart();
+    chooseSkill.SetActive(false);
 
     levelSystem = new LevelSystem();
-    abilitySystem = new AbilitySystem();
+    skillSystem = new SkillSystem();
 
     _chosenArea = new List<int>(3);
     for (int i = 0; i < 3; ++i) {
@@ -47,6 +48,8 @@ public class GameManager : MonoBehaviour {
     }
 
     chosenSkill = 0;
+
+    skillSystem.OnSkillUnlocked += SkillSystem_OnSkillUnlocked;
     // GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
   }
 
@@ -109,13 +112,14 @@ public class GameManager : MonoBehaviour {
     }
   }
 
-  // Choose ability to abilitySystem
-  public void ChooseAbility(int index) {
-    abilitySystem.Acquired(_chosenArea[index]);
+  // Choose Skill to skillSystem
+  // Called in UI OnClick
+  public void ChooseSkill(int index) {
+    skillSystem.Unlockskill((SkillSystem.SkillType)_chosenArea[index]);
 
     ResetChosenArea();
+    chooseSkill.SetActive(false);
     PauseToggle();
-    chooseAbility.SetActive(false);
     CursorToggle();
   }
 
@@ -147,13 +151,35 @@ public class GameManager : MonoBehaviour {
   }
 
   private void CursorToggle() {
-    if (Cursor.visible) {
-      Cursor.visible = false;
-      Cursor.lockState = CursorLockMode.Locked;
-    }
-    else {
-      Cursor.visible = true;
-      Cursor.lockState = CursorLockMode.None;
+    // if (Cursor.visible) {
+    //   Cursor.visible = false;
+    //   Cursor.lockState = CursorLockMode.Locked;
+    // }
+    // else {
+    //   Cursor.visible = true;
+    //   Cursor.lockState = CursorLockMode.None;
+    // }
+  }
+
+  private void SkillSystem_OnSkillUnlocked(object sender, SkillSystem.OnSkillUnlockedEventArgs e) {
+    switch (e.skillType) {
+      case SkillSystem.SkillType.FistDamageDouble:
+        GameObject.Find("Player").GetComponent<Fist>().damage *= 2;
+        break;
+      case SkillSystem.SkillType.FireCooldownDecrease:
+        GameObject.Find("Player").GetComponent<FanFlame>().coolDown /= 2;
+        GameObject.Find("Player").GetComponent<FireLaser>().coolDown /= 2;
+        break;
+      case SkillSystem.SkillType.FireLaserRangeDouble:
+        GameObject.Find("FireLaser").GetComponent<FireLaserAddon>().attackRange *= 2;
+        break;
+      case SkillSystem.SkillType.AcidCooldownDecrease:
+        GameObject.Find("Player").GetComponent<AcidBomb>().coolDown /= 2;
+        GameObject.Find("Player").GetComponent<AcidCloud>().coolDown /= 2;
+        break;
+      case SkillSystem.SkillType.AcidCloudLifetimeIncrease:
+        GameObject.Find("Player").GetComponent<AcidCloud>().lifetime *= 2;
+        break;
     }
   }
 
@@ -170,12 +196,15 @@ public class GameManager : MonoBehaviour {
     for (int i = 0; i < 3; ++i) {
       bool gotNum = false;
       while (!gotNum) {
-        int n = Random.Range(0, 15);
-        if (abilitySystem.isAcquired(n) || _chosenArea.IndexOf(n) != -1) {
+        int n = Random.Range(3, skillSystem.skillAmount);
+        if (!skillSystem.CanUnlockSkill((SkillSystem.SkillType)n) || 
+          _chosenArea.IndexOf(n) != -1
+        ) {
           continue;
         }
         else {
           _chosenArea[i] = n;
+          chooseSkill.transform.GetChild(i).GetChild(0).GetComponent<TMP_Text>().text = n.ToString();
           gotNum = true;
         }
       }
@@ -191,7 +220,7 @@ public class GameManager : MonoBehaviour {
   private void LevelUp() {
     SetChosenArea();
     CursorToggle();
-    chooseAbility.SetActive(true);
+    chooseSkill.SetActive(true);
   }
 
   // Set level's UI
@@ -208,5 +237,8 @@ public class GameManager : MonoBehaviour {
   // Set level num UI
   private void SetLevelNumber(int levelNumber) {
     levelText.text = "LEVEL " + (levelNumber + 1);
+  }
+
+  private void Restart() {
   }
 }
