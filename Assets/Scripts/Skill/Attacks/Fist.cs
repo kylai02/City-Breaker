@@ -7,6 +7,7 @@ class Fist : BasicSkill {
   public GameObject fistPrefab;
   public float speed;
   public float lifetime;
+  public float damage;
  
   public override void UseSkill() {
     readyToUse = false;

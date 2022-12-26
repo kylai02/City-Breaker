@@ -8,7 +8,7 @@ public class FistAddon : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
-        
+    damage = GameObject.Find("Player").GetComponent<Fist>().damage;
   }
 
     // Update is called once per frame
