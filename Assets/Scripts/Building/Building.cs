@@ -4,6 +4,7 @@ using UnityEngine;
 
 abstract class Building : MonoBehaviour {
   public GameObject nextStage;
+  public GameObject fireEffect;
   protected int _tier;
   protected float _timer;
 
@@ -60,6 +61,11 @@ abstract class Building : MonoBehaviour {
     if (onFire) {
       fireTimer -= Time.deltaTime;
       DealDmg(fireDamage * Time.deltaTime);
+      if (fireEffect) {
+        fireEffect.SetActive(true);
+      }
+    } else {
+      fireEffect.SetActive(false);
     }
     if (fireTimer <= 0) {
       onFire = false;
