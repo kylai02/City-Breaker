@@ -5,6 +5,7 @@ using UnityEngine;
 abstract class Building : MonoBehaviour {
   public GameObject nextStage;
   public GameObject fireEffect;
+  public GameObject corrodeEffect;
   protected int _tier;
   protected float _timer;
 
@@ -49,11 +50,15 @@ abstract class Building : MonoBehaviour {
       _timer += Time.deltaTime;
     }
     else {
+      if (corrodeEffect) {
+        corrodeEffect.SetActive(true);
+      }
       corrodeTimer -= Time.deltaTime;
     }
 
     if (corrodeTimer <= 0) {
       onCorrode = false;
+      corrodeEffect.SetActive(false);
     }
   }
 
@@ -64,10 +69,9 @@ abstract class Building : MonoBehaviour {
       if (fireEffect) {
         fireEffect.SetActive(true);
       }
-    } else {
-      fireEffect.SetActive(false);
     }
     if (fireTimer <= 0) {
+      fireEffect.SetActive(false);
       onFire = false;
     }
   }
