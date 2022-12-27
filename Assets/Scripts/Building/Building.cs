@@ -14,6 +14,12 @@ abstract class Building : MonoBehaviour {
   public float health;
   public float countdown;
   public int experience;
+
+  [Header("Explosion")]
+  public LayerMask buildingLayer;
+  public GameObject explosionEffect;
+  public float sputteringRadius;
+  public float sputteringDamege;
   
   [Header("Status")]
   public bool onCorrode;
@@ -85,7 +91,28 @@ abstract class Building : MonoBehaviour {
   protected void Survive() {
     if (health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
+      if (onFire) {
+        Explosion();
+      }
       Destroy(gameObject);
+    }
+  }
+
+  protected void Explosion() {
+    if (explosionEffect) {
+      Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+    }
+
+    Collider[] objectsInRange = Physics.OverlapSphere(
+      transform.position,
+      sputteringRadius,
+      buildingLayer
+    );
+
+    foreach (Collider target in objectsInRange) {
+      Building targetBuilding = target.gameObject.GetComponent<Building>();
+
+      targetBuilding.DealDmg(sputteringDamege);
     }
   }
 
