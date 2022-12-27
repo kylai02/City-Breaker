@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
   public TMP_Text levelText;
   // Bar of exp, on the left top
   public Image experienceBar;
+  public TMP_Text experienceNum;
   // Buttons for choose skill
   public GameObject chooseSkill;
   // Alert of T1 to T0
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour {
     }
 
     if (Input.GetKeyDown(KeyCode.R)) {
-      AddExperience(50);
+      AddExperience(1000);
     }
 
 
@@ -227,6 +228,7 @@ public class GameManager : MonoBehaviour {
   private void SetLevelSystem() {
     SetExperienceBarSize(levelSystem.GetExperienceNormalized());
     SetLevelNumber(levelSystem.GetLevel());
+    SetExperienceNumber(levelSystem.GetExperience(), levelSystem.GetExperienceToNextLevel());
   }
 
   // Set exp bar UI
@@ -237,6 +239,10 @@ public class GameManager : MonoBehaviour {
   // Set level num UI
   private void SetLevelNumber(int levelNumber) {
     levelText.text = "LEVEL " + (levelNumber + 1);
+  }
+
+  private void SetExperienceNumber(int experience, int experienceToNextLevel) {
+    experienceNum.text = experience + "/" + experienceToNextLevel;
   }
 
   private void Restart() {

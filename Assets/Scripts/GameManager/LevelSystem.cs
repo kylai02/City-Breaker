@@ -6,31 +6,50 @@ public class LevelSystem {
   private int _level;
   private int _experience;
   private int _experienceToNextLevel;
-  private int _experienceOffset;
+  private List<int> _levelupTable;
 
   public LevelSystem() {
+    _levelupTable = new List<int>(4);
+    _levelupTable.Add(1000);
+    _levelupTable.Add(2500);
+    _levelupTable.Add(5000);
+    _levelupTable.Add(10000);
+
     _level = 0;
     _experience = 0;
-    _experienceToNextLevel = 100;
-    _experienceOffset = 10;
+    _experienceToNextLevel = _levelupTable[0];
   }
 
   public void AddExperience(int amount) {
-    if (_level != 9) {
+    if (_level != 6) {
       _experience += amount;
 
-      if (_experience >= _experienceToNextLevel) {
+      while (_experience >= _experienceToNextLevel) {
         _level++;
         _experience -= _experienceToNextLevel;
-        _experienceToNextLevel += _experienceOffset;
         
-        if (_level == 9) _experience = 0;
+        if (_level < 4) {
+          _experienceToNextLevel = _levelupTable[_level];
+        }
+        else {
+          _experienceToNextLevel = 10000;
+        }
+        
+        if (_level == 6) _experience = 0;
       }
     }
   }
 
   public int GetLevel() {
     return _level;
+  }
+
+  public int GetExperience() {
+    return _experience;
+  }
+
+  public int GetExperienceToNextLevel() {
+    return _experienceToNextLevel;
   }
 
   public float GetExperienceNormalized() {

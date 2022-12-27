@@ -29,8 +29,7 @@ public class FireLaserAddon : MonoBehaviour {
     ) && hit.collider.CompareTag("Building")) {
       Building targetBuilding = hit.collider.GetComponent<Building>();
       targetBuilding.DealDmg(damage * Time.deltaTime);
-      targetBuilding.fireTimer = 5f;
-      targetBuilding.onFire = true;
+      targetBuilding.SetOnFire(5f);
     }
   }
 }

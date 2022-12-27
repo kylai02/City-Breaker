@@ -4,6 +4,8 @@ using UnityEngine;
 
 abstract class Building : MonoBehaviour {
   public GameObject nextStage;
+  public GameObject fireEffect;
+  public GameObject corrodeEffect;
   protected int _tier;
   protected float _timer;
 
@@ -43,6 +45,22 @@ abstract class Building : MonoBehaviour {
     health -= dmg;
   }
 
+  public void SetOnFire(float onFireTime) {
+    onFire = true;
+    fireTimer = onFireTime;
+    if (fireEffect) {
+      fireEffect.SetActive(true);
+    }
+  }
+
+  public void SetOnCorrode(float onCorrodeTime) {
+    onCorrode = true;
+    corrodeTimer = onCorrodeTime;
+    if (corrodeEffect) {
+      corrodeEffect.SetActive(true);
+    }
+  }
+
   protected void OnCorrodeCheck() {
     if (!onCorrode) {
       _timer += Time.deltaTime;
@@ -53,6 +71,7 @@ abstract class Building : MonoBehaviour {
 
     if (corrodeTimer <= 0) {
       onCorrode = false;
+      corrodeEffect.SetActive(false);
     }
   }
 
@@ -62,6 +81,7 @@ abstract class Building : MonoBehaviour {
       DealDmg(fireDamage * Time.deltaTime);
     }
     if (fireTimer <= 0) {
+      fireEffect.SetActive(false);
       onFire = false;
     }
   }
