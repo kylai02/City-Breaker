@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6491546520562213622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.23, y: 9.978808, z: -8.23}
-  m_LocalScale: {x: 3.1213, y: 0.3147945, z: 3.1213}
+  m_LocalScale: {x: 2.5, y: 0.3147945, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   speed: 1
+  damage: 10
 --- !u!33 &6491546520562213618
 MeshFilter:
   m_ObjectHideFlags: 0
