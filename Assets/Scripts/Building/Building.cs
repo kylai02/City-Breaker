@@ -15,6 +15,7 @@ abstract class Building : MonoBehaviour {
   public float countdown;
   public int experience;
   
+  [Header("Status")]
   public bool onCorrode;
   public bool onFire;
   public float corrodeTimer;
@@ -25,11 +26,6 @@ abstract class Building : MonoBehaviour {
   void Start() {
     CheckTier();
     _timer = 0;
-
-    onCorrode = false;
-    onFire = false;
-    corrodeTimer = -1;
-    fireTimer = -1;
   }
 
   // Update is called once per frame
@@ -102,6 +98,9 @@ abstract class Building : MonoBehaviour {
 
       // Set nextStage's health to the remain health of this building
       nextStage.GetComponent<Building>().DealDmg(defaultHealth - health);
+      if (onFire) {
+        nextStage.GetComponent<Building>().SetOnFire(fireTimer);
+      }
       Destroy(gameObject);
     }
   }
