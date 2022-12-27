@@ -45,14 +45,27 @@ abstract class Building : MonoBehaviour {
     health -= dmg;
   }
 
+  public void SetOnFire(float onFireTime) {
+    onFire = true;
+    fireTimer = onFireTime;
+    if (fireEffect) {
+      fireEffect.SetActive(true);
+    }
+  }
+
+  public void SetOnCorrode(float onCorrodeTime) {
+    onCorrode = true;
+    corrodeTimer = onCorrodeTime;
+    if (corrodeEffect) {
+      corrodeEffect.SetActive(true);
+    }
+  }
+
   protected void OnCorrodeCheck() {
     if (!onCorrode) {
       _timer += Time.deltaTime;
     }
     else {
-      if (corrodeEffect) {
-        corrodeEffect.SetActive(true);
-      }
       corrodeTimer -= Time.deltaTime;
     }
 
@@ -66,9 +79,6 @@ abstract class Building : MonoBehaviour {
     if (onFire) {
       fireTimer -= Time.deltaTime;
       DealDmg(fireDamage * Time.deltaTime);
-      if (fireEffect) {
-        fireEffect.SetActive(true);
-      }
     }
     if (fireTimer <= 0) {
       fireEffect.SetActive(false);
