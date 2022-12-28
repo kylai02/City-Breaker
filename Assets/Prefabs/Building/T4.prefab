@@ -1489,6 +1489,12 @@ MonoBehaviour:
   health: 100
   countdown: 5
   experience: 50
+  buildingLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  explosionEffect: {fileID: 6337679148060029805, guid: 3b716e9bbb9c0d14494128224a045c44, type: 3}
+  sputteringRadius: 3
+  sputteringDamege: 100
   onCorrode: 0
   onFire: 0
   corrodeTimer: 0

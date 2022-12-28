@@ -9,6 +9,7 @@ public class AcidCloudAddon : MonoBehaviour {
   [Header("Settings")]
   public LayerMask buildingLayer;
   public float speed;
+  public float damage;
 
   // Start is called before the first frame update
   void Start() {
@@ -23,10 +24,9 @@ public class AcidCloudAddon : MonoBehaviour {
   }
 
   private void ChangeForward() {
-    float x = Random.Range(-1f, 1f);
-    float z = Random.Range(-1f, 1f);
+    float angle = Random.Range(-45f, 45f);
 
-    transform.forward = new Vector3(x, 0f, z).normalized;
+    gameObject.transform.Rotate(Vector3.up, angle);
   }
 
   private void Rain() {
@@ -36,13 +36,14 @@ public class AcidCloudAddon : MonoBehaviour {
     Collider[] objectsUnderCloud = Physics.OverlapCapsule(
       transform.position,
       groundPos,
-      3.2f,
+      2.5f,
       buildingLayer
     );
 
     foreach (Collider target in objectsUnderCloud) {
       Building targetBuilding = target.gameObject.GetComponent<Building>();
       targetBuilding.SetOnCorrode(4f);
+      targetBuilding.DealDmg(damage * Time.deltaTime);
     }
   }
 }
