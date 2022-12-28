@@ -13,10 +13,10 @@ public class SkillSystem {
     None,
     Acid,
     Fire,
-    AcidBomb, // TODO
-    AcidCloud, // TODO
-    FanFlame, // TODO
-    FireLaser, // TODO
+    AcidBomb, 
+    AcidCloud, 
+    FanFlame, 
+    FireLaser, 
     ExplosionRangeDouble, // TODO
     FistDamageDouble,
     FireCooldownDecrease,

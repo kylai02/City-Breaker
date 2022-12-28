@@ -164,6 +164,18 @@ public class GameManager : MonoBehaviour {
 
   private void SkillSystem_OnSkillUnlocked(object sender, SkillSystem.OnSkillUnlockedEventArgs e) {
     switch (e.skillType) {
+      case SkillSystem.SkillType.AcidBomb:
+        GameObject.Find("Player").GetComponent<AcidBomb>().unlocked = true;
+        break;
+      case SkillSystem.SkillType.AcidCloud:
+        GameObject.Find("Player").GetComponent<AcidCloud>().unlocked = true;
+        break;
+      case SkillSystem.SkillType.FanFlame:
+        GameObject.Find("Player").GetComponent<FanFlame>().unlocked = true;
+        break;
+      case SkillSystem.SkillType.FireLaser:
+        GameObject.Find("Player").GetComponent<FireLaser>().unlocked = true;
+        break;
       case SkillSystem.SkillType.FistDamageDouble:
         GameObject.Find("Player").GetComponent<Fist>().damage *= 2;
         break;
