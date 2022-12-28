@@ -18,7 +18,7 @@ public class FistAddon : MonoBehaviour {
 
   private void OnCollisionEnter(Collision other) {
     if (other.gameObject.tag == "Building") {
-      other.gameObject.GetComponent<Building>().DealDmg(damage);
+      other.gameObject.GetComponent<Building>().DealDmg(damage, true);
       Destroy(gameObject);
     }
   }

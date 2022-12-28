@@ -52,9 +52,12 @@ abstract class Building : MonoBehaviour {
     Upgrade();
   }
 
-  public void DealDmg(float dmg) {
+  public void DealDmg(float dmg, bool shake) {
     health -= dmg;
-    _shakeTimer = shakeTime;
+    
+    if (shake) {
+      _shakeTimer = shakeTime;
+    }
   }
 
   public void SetOnFire(float onFireTime) {
@@ -90,7 +93,7 @@ abstract class Building : MonoBehaviour {
   protected void OnFireCheck() {
     if (onFire) {
       fireTimer -= Time.deltaTime;
-      DealDmg(fireDamage * Time.deltaTime);
+      DealDmg(fireDamage * Time.deltaTime, true);
     }
     if (fireTimer <= 0) {
       fireEffect.SetActive(false);
@@ -135,7 +138,7 @@ abstract class Building : MonoBehaviour {
     foreach (Collider target in objectsInRange) {
       Building targetBuilding = target.gameObject.GetComponent<Building>();
 
-      targetBuilding.DealDmg(sputteringDamege);
+      targetBuilding.DealDmg(sputteringDamege, true);
     }
   }
 
@@ -147,7 +150,7 @@ abstract class Building : MonoBehaviour {
       nextStage = Instantiate(nextStage, transform.position, transform.rotation);
 
       // Set nextStage's health to the remain health of this building
-      nextStage.GetComponent<Building>().DealDmg(defaultHealth - health);
+      nextStage.GetComponent<Building>().DealDmg(defaultHealth - health, false);
       if (onFire) {
         nextStage.GetComponent<Building>().SetOnFire(fireTimer);
       }
