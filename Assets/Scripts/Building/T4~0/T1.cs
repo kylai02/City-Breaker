@@ -10,6 +10,7 @@ class T1 : Building {
   private void Update() {
     OnCorrodeCheck();
     OnFireCheck();
+    ShakeCheck();
 
     Survive();
     ShowDangerous();

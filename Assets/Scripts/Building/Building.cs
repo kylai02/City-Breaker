@@ -14,6 +14,12 @@ abstract class Building : MonoBehaviour {
   public float health;
   public float countdown;
   public int experience;
+  public float shakeTime;
+  public float shakeAmount;
+
+  private float _shakeTimer;
+  private Vector3 _initPos;
+  private bool _isShaking;
 
   [Header("Explosion")]
   public LayerMask buildingLayer;
@@ -30,6 +36,8 @@ abstract class Building : MonoBehaviour {
   
   // Start is called before the first frame update
   void Start() {
+    _isShaking = false;
+    _initPos = transform.localPosition;
     CheckTier();
     _timer = 0;
   }
@@ -38,6 +46,7 @@ abstract class Building : MonoBehaviour {
   void Update() {
     OnCorrodeCheck();
     OnFireCheck();
+    ShakeCheck();
 
     Survive();
     Upgrade();
@@ -45,6 +54,7 @@ abstract class Building : MonoBehaviour {
 
   public void DealDmg(float dmg) {
     health -= dmg;
+    _shakeTimer = shakeTime;
   }
 
   public void SetOnFire(float onFireTime) {
@@ -85,6 +95,19 @@ abstract class Building : MonoBehaviour {
     if (fireTimer <= 0) {
       fireEffect.SetActive(false);
       onFire = false;
+    }
+  }
+
+  protected void ShakeCheck() {
+    if (_shakeTimer > 0) {
+      Vector3 shakePos = _initPos + Random.insideUnitSphere * shakeAmount;
+      shakePos.y = _initPos.y;
+      transform.localPosition = shakePos;
+
+      _shakeTimer -= Time.deltaTime;
+    }
+    else {
+      transform.localPosition = _initPos;
     }
   }
 
