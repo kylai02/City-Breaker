@@ -1280,6 +1280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStage: {fileID: 0}
+  wholeObject: {fileID: 3535355141009137651}
   fireEffect: {fileID: 1294901470926766364}
   corrodeEffect: {fileID: 1294901470467802976}
   defaultHealth: 500

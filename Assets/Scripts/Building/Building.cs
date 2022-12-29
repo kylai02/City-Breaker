@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 abstract class Building : MonoBehaviour {
+  [Header("References")]
   public GameObject nextStage;
+  public GameObject wholeObject;
+  public GameObject fractureObject;
   public GameObject fireEffect;
   public GameObject corrodeEffect;
-  protected int _tier;
-  protected float _timer;
 
   [Header("Settings")]
   public float defaultHealth;
@@ -17,6 +19,8 @@ abstract class Building : MonoBehaviour {
   public float shakeTime;
   public float shakeAmount;
 
+  protected float _timer;
+  protected int _tier;
   private float _shakeTimer;
   private Vector3 _initPos;
   private bool _isShaking;
@@ -26,6 +30,7 @@ abstract class Building : MonoBehaviour {
   public GameObject explosionEffect;
   public float sputteringRadius;
   public float sputteringDamege;
+  public float explosionForce;
   
   [Header("Status")]
   public bool onCorrode;
@@ -33,6 +38,8 @@ abstract class Building : MonoBehaviour {
   public float corrodeTimer;
   public float fireTimer;
   public float fireDamage;
+  
+  private bool _died;
   
   // Start is called before the first frame update
   void Start() {
@@ -102,31 +109,60 @@ abstract class Building : MonoBehaviour {
   }
 
   protected void ShakeCheck() {
-    if (_shakeTimer > 0) {
-      Vector3 shakePos = _initPos + Random.insideUnitSphere * shakeAmount;
-      shakePos.y = _initPos.y;
-      transform.localPosition = shakePos;
+    if (!_died) {
+      if (_shakeTimer > 0) {
+        Vector3 shakePos = _initPos + Random.insideUnitSphere * shakeAmount;
+        shakePos.y = _initPos.y;
+        transform.localPosition = shakePos;
 
-      _shakeTimer -= Time.deltaTime;
+        _shakeTimer -= Time.deltaTime;
+      }
+      else {
+        transform.localPosition = _initPos;
+      }
     }
     else {
-      transform.localPosition = _initPos;
+      Vector3 shakePos = _initPos + Random.insideUnitSphere * shakeAmount * 2f;
+      shakePos.y = _initPos.y;
+      transform.localPosition = shakePos;
     }
   }
 
   protected void Survive() {
-    if (health <= 0) {
+    if (!_died && health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
       if (onFire) {
         Explosion();
+        Destroy(wholeObject, 5f);
       }
-      Destroy(gameObject);
+      else {
+        _died = true;
+        transform.DOLocalMoveY(-8, 5);
+        Destroy(wholeObject, 5f);
+      }
     }
   }
 
   protected void Explosion() {
     if (explosionEffect) {
       Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+    }
+
+    if (fractureObject) {
+      gameObject.SetActive(false);
+      fireEffect.SetActive(false);
+      corrodeEffect.SetActive(false);
+      fractureObject.SetActive(true);
+      
+      foreach (Transform chip in fractureObject.transform) {
+        var rb = chip.GetComponent<Rigidbody>();
+
+        rb.AddExplosionForce(
+          explosionForce,
+          transform.position,
+          sputteringRadius
+        );
+      }
     }
 
     Collider[] objectsInRange = Physics.OverlapSphere(
@@ -154,7 +190,7 @@ abstract class Building : MonoBehaviour {
       if (onFire) {
         nextStage.GetComponent<Building>().SetOnFire(fireTimer);
       }
-      Destroy(gameObject);
+      Destroy(wholeObject);
     }
   }
 
