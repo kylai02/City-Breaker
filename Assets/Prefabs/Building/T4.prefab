@@ -1489,6 +1489,8 @@ MonoBehaviour:
   health: 100
   countdown: 5
   experience: 50
+  shakeTime: 1
+  shakeAmount: 0.1
   buildingLayer:
     serializedVersion: 2
     m_Bits: 128

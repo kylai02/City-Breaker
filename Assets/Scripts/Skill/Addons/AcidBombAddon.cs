@@ -31,10 +31,10 @@ public class AcidBombAddon : MonoBehaviour {
       Building targetBuilding = target.gameObject.GetComponent<Building>();
 
       if (target.gameObject == other.gameObject) {
-        targetBuilding.DealDmg(directDamage);
+        targetBuilding.DealDmg(directDamage, true);
       }
       else {
-        targetBuilding.DealDmg(sputteringDamege);
+        targetBuilding.DealDmg(sputteringDamege, true);
       }
       targetBuilding.SetOnCorrode(4f);
     }

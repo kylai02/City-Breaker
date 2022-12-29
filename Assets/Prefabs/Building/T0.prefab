@@ -48,10 +48,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextStage: {fileID: 7303281401102613135}
+  fireEffect: {fileID: 0}
+  corrodeEffect: {fileID: 0}
   defaultHealth: 100
   health: 100
   countdown: 5
   experience: 50
+  shakeTime: 1
+  shakeAmount: 0.1
+  buildingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  explosionEffect: {fileID: 0}
+  sputteringRadius: 0
+  sputteringDamege: 0
   onCorrode: 0
   onFire: 0
   corrodeTimer: 0

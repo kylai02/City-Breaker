@@ -43,7 +43,7 @@ public class AcidCloudAddon : MonoBehaviour {
     foreach (Collider target in objectsUnderCloud) {
       Building targetBuilding = target.gameObject.GetComponent<Building>();
       targetBuilding.SetOnCorrode(4f);
-      targetBuilding.DealDmg(damage * Time.deltaTime);
+      targetBuilding.DealDmg(damage * Time.deltaTime, true);
     }
   }
 }
