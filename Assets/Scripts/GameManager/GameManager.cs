@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour {
   public SkillSystem skillSystem;
 
   public GameObject fireLaser;
+  public bool explosionUpgrade;
+  
 
   // Tmp for choose ability's index
   private List<int> _chosenArea;
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour {
   // Start is called before the first frame update
   void Start() {
     Restart();
+    explosionUpgrade = false;
     chooseSkill.SetActive(false);
 
     levelSystem = new LevelSystem();
@@ -177,6 +180,9 @@ public class GameManager : MonoBehaviour {
         break;
       case SkillSystem.SkillType.FireLaser:
         GameObject.Find("Player").GetComponent<FireLaser>().unlocked = true;
+        break;
+      case SkillSystem.SkillType.ExplosionRangeDouble:
+        explosionUpgrade = true;
         break;
       case SkillSystem.SkillType.FistDamageDouble:
         GameObject.Find("Player").GetComponent<Fist>().damage *= 2;

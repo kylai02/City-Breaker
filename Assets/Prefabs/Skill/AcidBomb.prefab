@@ -51,6 +51,7 @@ MonoBehaviour:
   buildingLayer:
     serializedVersion: 2
     m_Bits: 128
+  explosionEffect: {fileID: 856491398617299450, guid: 2a39db0f36b14b84a8af644fff792a40, type: 3}
   directDamage: 100
   sputteringDamege: 50
   sputteringRadius: 5

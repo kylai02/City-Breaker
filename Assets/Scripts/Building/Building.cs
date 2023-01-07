@@ -27,7 +27,8 @@ abstract class Building : MonoBehaviour {
 
   [Header("Explosion")]
   public LayerMask buildingLayer;
-  public GameObject explosionEffect;
+  public GameObject basicExplosionEffect;
+  public GameObject upgradeExplosionEffect;
   public float sputteringRadius;
   public float sputteringDamege;
   public float explosionForce;
@@ -144,9 +145,11 @@ abstract class Building : MonoBehaviour {
   }
 
   protected void Explosion() {
-    if (explosionEffect) {
-      Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
-    }
+    bool isUpgrade = GameObject.Find("GameManager").GetComponent<GameManager>().explosionUpgrade;
+    GameObject effect = isUpgrade ?
+      Instantiate(upgradeExplosionEffect, gameObject.transform.position, gameObject.transform.rotation) : 
+      Instantiate(basicExplosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+    Destroy(effect, 1.5f);
 
     if (fractureObject) {
       gameObject.SetActive(false);
@@ -160,7 +163,7 @@ abstract class Building : MonoBehaviour {
         rb.AddExplosionForce(
           explosionForce,
           transform.position,
-          sputteringRadius
+          isUpgrade ? sputteringRadius * 2 : sputteringRadius
         );
 
         // StartCoroutine(Shrink(chip, 2));
@@ -170,7 +173,7 @@ abstract class Building : MonoBehaviour {
 
     Collider[] objectsInRange = Physics.OverlapSphere(
       transform.position,
-      sputteringRadius,
+      isUpgrade ? sputteringRadius * 2 : sputteringRadius,
       buildingLayer
     );
 

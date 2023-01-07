@@ -5,6 +5,7 @@ using UnityEngine;
 public class AcidBombAddon : MonoBehaviour {
   [Header("Settings")]
   public LayerMask buildingLayer;
+  public GameObject explosionEffect;
   public float directDamage;
   public float sputteringDamege;
   public float sputteringRadius;
@@ -21,6 +22,12 @@ public class AcidBombAddon : MonoBehaviour {
   }
 
   private void OnCollisionEnter(Collision other) {
+    GameObject effect = Instantiate(
+      explosionEffect,
+      gameObject.transform.position,
+      gameObject.transform.rotation
+    );
+
     Collider[] objectsInRange = Physics.OverlapSphere(
       transform.position, 
       sputteringRadius, 
@@ -38,7 +45,8 @@ public class AcidBombAddon : MonoBehaviour {
       }
       targetBuilding.SetOnCorrode(4f);
     }
-
+    
+    Destroy(effect, 2f);
     Destroy(gameObject);
   }
 }

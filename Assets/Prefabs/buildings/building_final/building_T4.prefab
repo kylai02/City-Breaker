@@ -881,6 +881,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextStage: {fileID: 0}
   wholeObject: {fileID: 2930840913060828955}
+  fractureObject: {fileID: 0}
   fireEffect: {fileID: 236330192530545639}
   corrodeEffect: {fileID: 7264602792037854400}
   defaultHealth: 100
@@ -892,9 +893,11 @@ MonoBehaviour:
   buildingLayer:
     serializedVersion: 2
     m_Bits: 128
-  explosionEffect: {fileID: 6337679148060029805, guid: 3b716e9bbb9c0d14494128224a045c44, type: 3}
+  basicExplosionEffect: {fileID: 2701746707124208505, guid: 83d0e586eac1a1246a42445622a366c0, type: 3}
+  upgradeExplosionEffect: {fileID: 5817101414626847123, guid: f904f3f74e8be924eb02efbb99247209, type: 3}
   sputteringRadius: 3
   sputteringDamege: 100
+  explosionForce: 0
   onCorrode: 0
   onFire: 0
   corrodeTimer: 0

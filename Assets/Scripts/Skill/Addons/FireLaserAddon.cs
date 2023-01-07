@@ -37,6 +37,8 @@ public class FireLaserAddon : MonoBehaviour {
   public void RangeIncrease() {
     Debug.Log("here");
     attackRange *= 2;
-    fireLaserEffect.startLifetime = 1.3f; 
+
+    var effectMain = fireLaserEffect.main;
+    effectMain.startLifetime = 1.3f; 
   }
 }
