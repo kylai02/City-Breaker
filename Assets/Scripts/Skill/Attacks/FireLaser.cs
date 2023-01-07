@@ -15,6 +15,7 @@ class FireLaser : BasicSkill {
   }
 
   private void CloseFireLaser() {
+    coolDownTimer = coolDown;
     fireLaser.SetActive(false);
     Invoke(nameof(ResetUse), coolDown);
   }

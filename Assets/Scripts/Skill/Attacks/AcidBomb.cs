@@ -11,6 +11,7 @@ class AcidBomb : BasicSkill {
 
   public override void UseSkill() {
     readyToUse = false;
+    coolDownTimer = coolDown;
 
     GameObject acidBomb = Instantiate(
       acidBombPrefab,

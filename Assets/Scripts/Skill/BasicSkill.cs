@@ -21,7 +21,7 @@ abstract class BasicSkill : MonoBehaviour {
     protected set;
   }
 
-  private float coolDownTimer;
+  protected float coolDownTimer;
 
   // Start is called before the first frame update
   void Start() {
@@ -37,7 +37,6 @@ abstract class BasicSkill : MonoBehaviour {
       unlocked
     ) {
       UseSkill();
-      coolDownTimer = coolDown;
     }
 
     SetCoolDownCover();

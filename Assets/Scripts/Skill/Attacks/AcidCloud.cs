@@ -9,6 +9,7 @@ class AcidCloud : BasicSkill {
 
   public override void UseSkill() {
     readyToUse = false;
+    coolDownTimer = coolDown;
 
     Vector3 spawn = attackSpawn.position;
     spawn.y = 9;
