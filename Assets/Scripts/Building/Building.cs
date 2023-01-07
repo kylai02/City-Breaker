@@ -133,7 +133,7 @@ abstract class Building : MonoBehaviour {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
       if (onFire) {
         Explosion();
-        Destroy(wholeObject, 5f);
+        Destroy(wholeObject, 3f);
       }
       else {
         _died = true;
@@ -162,8 +162,11 @@ abstract class Building : MonoBehaviour {
           transform.position,
           sputteringRadius
         );
+
+        // StartCoroutine(Shrink(chip, 2));
       }
     }
+    
 
     Collider[] objectsInRange = Physics.OverlapSphere(
       transform.position,
@@ -195,4 +198,19 @@ abstract class Building : MonoBehaviour {
   }
 
   protected abstract void CheckTier();
+
+  // IEnumerable Shrink(Transform t, float delay)
+  // {
+  //   yield return new WaitForSeconds(delay);
+
+  //   Vector3 newScale = t.localScale;
+
+  //   while (newScale.x >= 0)
+  //   {
+  //     newScale -= new Vector3(1f, 1f, 1f);
+
+  //     t.localScale = newScale;
+  //     yield return new WaitForSeconds(0.05f);
+  //   }
+  // }
 }
