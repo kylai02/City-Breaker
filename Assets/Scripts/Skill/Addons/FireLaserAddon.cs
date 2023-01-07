@@ -6,6 +6,7 @@ public class FireLaserAddon : MonoBehaviour {
   [Header("Settings")]
   public float attackRange;
   public float damage;
+  public ParticleSystem fireLaserEffect;
 
   // Start is called before the first frame update
   void Start() {
@@ -31,5 +32,11 @@ public class FireLaserAddon : MonoBehaviour {
       targetBuilding.DealDmg(damage * Time.deltaTime, true);
       targetBuilding.SetOnFire(5f);
     }
+  }
+
+  public void RangeIncrease() {
+    Debug.Log("here");
+    attackRange *= 2;
+    fireLaserEffect.startLifetime = 1.3f; 
   }
 }

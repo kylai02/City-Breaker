@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour {
   // Maintain a Skill System
   public SkillSystem skillSystem;
 
+  public GameObject fireLaser;
+
   // Tmp for choose ability's index
   private List<int> _chosenArea;
   
@@ -184,7 +186,7 @@ public class GameManager : MonoBehaviour {
         GameObject.Find("Player").GetComponent<FireLaser>().coolDown /= 2;
         break;
       case SkillSystem.SkillType.FireLaserRangeDouble:
-        GameObject.Find("FireLaser").GetComponent<FireLaserAddon>().attackRange *= 2;
+        fireLaser.GetComponent<FireLaserAddon>().RangeIncrease();
         break;
       case SkillSystem.SkillType.AcidCooldownDecrease:
         GameObject.Find("Player").GetComponent<AcidBomb>().coolDown /= 2;
