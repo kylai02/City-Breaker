@@ -15,6 +15,7 @@ class FanFlame : BasicSkill {
   }
 
   private void CloseFanFlame() {
+    coolDownTimer = coolDown;
     fanFlame.SetActive(false);
     Invoke(nameof(ResetUse), coolDown);
   }

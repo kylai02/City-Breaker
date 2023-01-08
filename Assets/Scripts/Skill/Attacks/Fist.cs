@@ -11,6 +11,7 @@ class Fist : BasicSkill {
  
   public override void UseSkill() {
     readyToUse = false;
+    coolDownTimer = coolDown;
 
     GameObject fist = Instantiate(
       fistPrefab, 

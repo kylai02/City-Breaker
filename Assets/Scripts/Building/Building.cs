@@ -5,11 +5,13 @@ using DG.Tweening;
 
 abstract class Building : MonoBehaviour {
   [Header("References")]
-  public GameObject nextStage;
+  public GameObject nextStage1;
+  public GameObject nextStage2;
   public GameObject wholeObject;
   public GameObject fractureObject;
   public GameObject fireEffect;
   public GameObject corrodeEffect;
+  public Animator animator;
 
   [Header("Settings")]
   public float defaultHealth;
@@ -27,7 +29,8 @@ abstract class Building : MonoBehaviour {
 
   [Header("Explosion")]
   public LayerMask buildingLayer;
-  public GameObject explosionEffect;
+  public GameObject basicExplosionEffect;
+  public GameObject upgradeExplosionEffect;
   public float sputteringRadius;
   public float sputteringDamege;
   public float explosionForce;
@@ -131,9 +134,19 @@ abstract class Building : MonoBehaviour {
   protected void Survive() {
     if (!_died && health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
+      if (_tier == 1) {
+        GameObject.Find("GameManager").GetComponent<GameManager>().AlertCounterChange(-1);
+      }
+
       if (onFire) {
+        _died = true;
         Explosion();
         Destroy(wholeObject, 3f);
+      }
+      else if (onCorrode) {
+        _died = true;
+        animator.SetTrigger("Dissolve-Trigger");
+        Destroy(wholeObject, 1f);
       }
       else {
         _died = true;
@@ -144,9 +157,11 @@ abstract class Building : MonoBehaviour {
   }
 
   protected void Explosion() {
-    if (explosionEffect) {
-      Instantiate(explosionEffect, gameObject.transform.position, gameObject.transform.rotation);
-    }
+    bool isUpgrade = GameObject.Find("GameManager").GetComponent<GameManager>().explosionUpgrade;
+    GameObject effect = isUpgrade ?
+      Instantiate(upgradeExplosionEffect, gameObject.transform.position, gameObject.transform.rotation) : 
+      Instantiate(basicExplosionEffect, gameObject.transform.position, gameObject.transform.rotation);
+    Destroy(effect, 1.5f);
 
     if (fractureObject) {
       gameObject.SetActive(false);
@@ -160,7 +175,7 @@ abstract class Building : MonoBehaviour {
         rb.AddExplosionForce(
           explosionForce,
           transform.position,
-          sputteringRadius
+          isUpgrade ? sputteringRadius * 2 : sputteringRadius
         );
 
         // StartCoroutine(Shrink(chip, 2));
@@ -170,7 +185,7 @@ abstract class Building : MonoBehaviour {
 
     Collider[] objectsInRange = Physics.OverlapSphere(
       transform.position,
-      sputteringRadius,
+      isUpgrade ? sputteringRadius * 2 : sputteringRadius,
       buildingLayer
     );
 
@@ -186,13 +201,21 @@ abstract class Building : MonoBehaviour {
       // Prevent to get double experience
       experience = 0;
 
-      nextStage = Instantiate(nextStage, transform.position, transform.rotation);
+      bool upgradePre = Random.Range(0, 2) == 0;
+      GameObject nextStage = Instantiate(
+        upgradePre ? nextStage1 : nextStage2,
+        transform.position, 
+        nextStage1.transform.rotation
+      );
+      Debug.Log(nextStage.name);
+      Building nextStageBuilding = nextStage.transform.GetChild(0).GetComponent<Building>();
 
       // Set nextStage's health to the remain health of this building
-      nextStage.GetComponent<Building>().DealDmg(defaultHealth - health, false);
+      nextStageBuilding.DealDmg(defaultHealth - health, false);
       if (onFire) {
-        nextStage.GetComponent<Building>().SetOnFire(fireTimer);
+        nextStageBuilding.SetOnFire(fireTimer);
       }
+
       Destroy(wholeObject);
     }
   }
