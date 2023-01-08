@@ -15,14 +15,21 @@ class Fist : BasicSkill {
     readyToUse = false;
     coolDownTimer = coolDown;
 
+    Vector3 source = attackSpawn.position + attackSpawn.transform.right * 1;
+
     GameObject fist = Instantiate(
       fistPrefab, 
-      attackSpawn.position, 
+      source, 
       attackSpawn.rotation
     );
+    fist.transform.Rotate(Vector3.forward, 90f);
+
     Rigidbody fistRb = fist.GetComponent<Rigidbody>();
 
-    fistRb.velocity = attackSpawn.transform.forward * speed;
+    Vector3 destination = 
+      attackSpawn.position + 
+      attackSpawn.transform.forward * (speed * lifetime);
+    fistRb.velocity = (destination - source).normalized * speed * 1.08f;
 
     Destroy(fist, lifetime);
     Invoke(nameof(ResetUse), coolDown);

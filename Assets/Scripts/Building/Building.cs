@@ -11,6 +11,7 @@ abstract class Building : MonoBehaviour {
   public GameObject fractureObject;
   public GameObject fireEffect;
   public GameObject corrodeEffect;
+  public GameObject upgradeEffect;
   public Animator animator;
 
   [Header("Audio")]
@@ -150,6 +151,9 @@ abstract class Building : MonoBehaviour {
 
   protected void Survive() {
     if (!_died && health <= 0) {
+      if (upgradeEffect) {
+        upgradeEffect.SetActive(false);
+      }
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
       if (_tier == 1) {
         GameObject.Find("GameManager").GetComponent<GameManager>().AlertCounterChange(-1);
@@ -162,6 +166,7 @@ abstract class Building : MonoBehaviour {
       }
       else if (onCorrode) {
         _died = true;
+        corrodeEffect.SetActive(false);
         animator.SetTrigger("Dissolve-Trigger");
         Destroy(wholeObject, 1f);
       }

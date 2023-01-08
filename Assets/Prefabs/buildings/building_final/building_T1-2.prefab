@@ -195,7 +195,8 @@ MonoBehaviour:
   fractureObject: {fileID: 4309191688032669716}
   fireEffect: {fileID: 3575071303710682645}
   corrodeEffect: {fileID: 2996747471962372858}
-  animator: {fileID: 0}
+  upgradeEffect: {fileID: 4436635026582427169}
+  animator: {fileID: 3601443841827765106}
   burningSound: {fileID: 1293644520301633086}
   dissolvingSound: {fileID: 2926733697154269110}
   explosionSound: {fileID: 8300000, guid: 8d1bbaecb844ba04e86bf2a4066e3c01, type: 3}
@@ -218,7 +219,6 @@ MonoBehaviour:
   corrodeTimer: 0
   fireTimer: 0
   fireDamage: 20
-  upgradeAnimation: {fileID: 4436635026582427169}
 --- !u!33 &6691042446511113352
 MeshFilter:
   m_ObjectHideFlags: 0
