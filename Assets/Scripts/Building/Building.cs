@@ -13,6 +13,11 @@ abstract class Building : MonoBehaviour {
   public GameObject corrodeEffect;
   public Animator animator;
 
+  [Header("Audio")]
+  public AudioSource burningSound;
+  public AudioSource dissolvingSound;
+  public AudioClip explosionSound;
+
   [Header("Settings")]
   public float defaultHealth;
   public float health;
@@ -92,11 +97,17 @@ abstract class Building : MonoBehaviour {
     }
     else {
       corrodeTimer -= Time.deltaTime;
+      if (!dissolvingSound.isPlaying) {
+        dissolvingSound.Play();
+      }
     }
 
     if (corrodeTimer <= 0) {
       onCorrode = false;
       corrodeEffect.SetActive(false);
+      if (dissolvingSound.isPlaying) {
+        dissolvingSound.Stop();
+      }
     }
   }
 
@@ -104,10 +115,16 @@ abstract class Building : MonoBehaviour {
     if (onFire) {
       fireTimer -= Time.deltaTime;
       DealDmg(fireDamage * Time.deltaTime, true);
+      if (!burningSound.isPlaying) {
+        burningSound.Play();
+      }
     }
     if (fireTimer <= 0) {
       fireEffect.SetActive(false);
       onFire = false;
+      if (burningSound.isPlaying) {
+        burningSound.Stop();
+      }
     }
   }
 
@@ -163,6 +180,8 @@ abstract class Building : MonoBehaviour {
       Instantiate(basicExplosionEffect, gameObject.transform.position, gameObject.transform.rotation);
     Destroy(effect, 1.5f);
 
+    AudioSource.PlayClipAtPoint(explosionSound, transform.position);
+
     if (fractureObject) {
       gameObject.SetActive(false);
       fireEffect.SetActive(false);
@@ -207,7 +226,6 @@ abstract class Building : MonoBehaviour {
         transform.position, 
         nextStage1.transform.rotation
       );
-      Debug.Log(nextStage.name);
       Building nextStageBuilding = nextStage.transform.GetChild(0).GetComponent<Building>();
 
       // Set nextStage's health to the remain health of this building

@@ -5,9 +5,11 @@ using UnityEngine;
 class AcidCloud : BasicSkill {
   [Header("AcidCloud")]
   public GameObject acidCloudPrefab;
+  public AudioSource acidCloudSound;
   public float lifetime;
 
   public override void UseSkill() {
+    acidCloudSound.Play();
     readyToUse = false;
     coolDownTimer = coolDown;
 

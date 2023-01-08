@@ -6,11 +6,10 @@ public class AcidBombAddon : MonoBehaviour {
   [Header("Settings")]
   public LayerMask buildingLayer;
   public GameObject explosionEffect;
+  public AudioClip explosionSound;
   public float directDamage;
   public float sputteringDamege;
   public float sputteringRadius;
-  public AudioSource explosionSound;
-  
 
   // Start is called before the first frame update
   void Start() {
@@ -23,7 +22,7 @@ public class AcidBombAddon : MonoBehaviour {
   }
 
   private void OnCollisionEnter(Collision other) {
-    explosionSound.Play();
+    AudioSource.PlayClipAtPoint(explosionSound, transform.position);
     GameObject effect = Instantiate(
       explosionEffect,
       gameObject.transform.position,

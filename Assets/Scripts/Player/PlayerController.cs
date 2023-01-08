@@ -31,10 +31,6 @@ public class PlayerController : MonoBehaviour {
   public float playerHeight;
   public float groundDrag;
 
-  [Header("Attack")]
-  public GameObject attackSpawn;
-  public GameObject fistPrefab;
-
   [Header("Audio Source")]
   public AudioSource jumpSound;
 

@@ -27,8 +27,9 @@ public class GameManager : MonoBehaviour {
   [Header("System Info")]
   // Whether the game is paused
   public bool isPaused = false;
+  public AudioSource alertSound;
   private float _alertTimer;
-  public int _alertCounter;
+  private int _alertCounter;
 
   [Header("Player Info")]
   // Maintain a Level System
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour {
   // Tmp for choose ability's index
   private List<int> _chosenArea;
   
+  private int _eggCtr = 0;
   // Start is called before the first frame update
   void Start() {
     Restart();
@@ -72,6 +74,13 @@ public class GameManager : MonoBehaviour {
         KeepGoing();
       }
       else {
+        _eggCtr++;
+        if (_eggCtr == 66) {
+          FindObjectOfType<AudioManager>().Play("EGG");
+        }
+        else {
+          FindObjectOfType<AudioManager>().Play("Pause");
+        }
         PauseMenu();
       }
 
@@ -113,6 +122,7 @@ public class GameManager : MonoBehaviour {
 
   // Alert for T1 to T0
   public void Alert() {
+    alertSound.Play();
     dangerous.SetActive(true);
     _alertTimer = 120f;
   }
@@ -143,6 +153,7 @@ public class GameManager : MonoBehaviour {
   public void GameOver() {
     gameOver.SetActive(true);
     inGame.SetActive(false);
+    FindObjectOfType<AudioManager>().Play("GameOver");
     Tweener tweener = gameOver.transform.GetChild(1).DOScale(2f, 0.5f);
     tweener.SetUpdate(true);
 
@@ -257,6 +268,7 @@ public class GameManager : MonoBehaviour {
 
   // When level up, let user choose ability
   private void LevelUp() {
+    FindObjectOfType<AudioManager>().Play("LevelUp");
     SetChosenArea();
     CursorToggle();
     chooseSkill.SetActive(true);
