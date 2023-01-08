@@ -479,6 +479,7 @@ MonoBehaviour:
   fractureObject: {fileID: 6989683072496246095}
   fireEffect: {fileID: 2491269095082288318}
   corrodeEffect: {fileID: 7865853570446871963}
+  upgradeEffect: {fileID: 2207481190133330870}
   animator: {fileID: 2247831072192197762}
   burningSound: {fileID: 698251319991104839}
   dissolvingSound: {fileID: 8701255288811762670}
@@ -502,7 +503,6 @@ MonoBehaviour:
   corrodeTimer: 0
   fireTimer: 0
   fireDamage: 20
-  upgradeAnimation: {fileID: 2207481190133330870}
 --- !u!33 &3580210360516107530
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -844,6 +844,10 @@ PrefabInstance:
     - target: {fileID: 2396829745187267925, guid: b438125d6c4eeb34e8449fb6d41dbc83, type: 3}
       propertyPath: m_Name
       value: UpgradeEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2396829745187267925, guid: b438125d6c4eeb34e8449fb6d41dbc83, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396829745187640749, guid: b438125d6c4eeb34e8449fb6d41dbc83, type: 3}
       propertyPath: m_RootOrder

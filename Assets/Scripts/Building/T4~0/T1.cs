@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 class T1 : Building {
-  public GameObject upgradeAnimation;
-
   private bool _alreadyAlert;
   
   private void Update() {
@@ -24,7 +22,7 @@ class T1 : Building {
 
   private void ShowDangerous() {
     if (!_alreadyAlert) {
-      upgradeAnimation.SetActive(true);
+      upgradeEffect.SetActive(true);
       GameObject.Find("GameManager").GetComponent<GameManager>().Alert();
       GameObject.Find("GameManager").GetComponent<GameManager>().AlertCounterChange(1);
       _alreadyAlert = true;
