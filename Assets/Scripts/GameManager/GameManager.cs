@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour {
   [Header("UI References")]
@@ -19,12 +20,15 @@ public class GameManager : MonoBehaviour {
   public GameObject chooseSkill;
   // Alert of T1 to T0
   public GameObject dangerous;
+  public TMP_Text alertCounterUI;
 
   public int chosenSkill;
 
   [Header("System Info")]
   // Whether the game is paused
   public bool isPaused = false;
+  private float _alertTimer;
+  public int _alertCounter;
 
   [Header("Player Info")]
   // Maintain a Level System
@@ -42,6 +46,8 @@ public class GameManager : MonoBehaviour {
   // Start is called before the first frame update
   void Start() {
     Restart();
+    _alertTimer = 0;
+    _alertCounter = 0;
     explosionUpgrade = false;
     chooseSkill.SetActive(false);
 
@@ -86,7 +92,12 @@ public class GameManager : MonoBehaviour {
     }
 
 
+    if (Input.GetKeyDown(KeyCode.L)) {
+      GameOver();
+    }
+
     SetLevelSystem();
+    SetAlert();
   }
 
   public void ChangeSkill(int parameter) {
@@ -103,7 +114,7 @@ public class GameManager : MonoBehaviour {
   // Alert for T1 to T0
   public void Alert() {
     dangerous.SetActive(true);
-    Invoke("CloseDangerous", 2f);
+    _alertTimer = 120f;
   }
 
   // Add exp to levelSystem, if level up, call LevelUp
@@ -132,7 +143,14 @@ public class GameManager : MonoBehaviour {
   public void GameOver() {
     gameOver.SetActive(true);
     inGame.SetActive(false);
+    Tweener tweener = gameOver.transform.GetChild(1).DOScale(2f, 0.5f);
+    tweener.SetUpdate(true);
+
     PauseToggle();
+  }
+
+  public void AlertCounterChange(int offset) {
+    _alertCounter += offset;
   }
 
   private void PauseMenu() {
@@ -266,5 +284,19 @@ public class GameManager : MonoBehaviour {
   }
 
   private void Restart() {
+  }
+
+  private void SetAlert() {
+    if (_alertCounter <= 0) {
+      _alertTimer = 0;
+    }
+
+    if (_alertTimer > 0) {
+      _alertTimer -= Time.deltaTime;
+      alertCounterUI.text = "x" + _alertCounter;
+    }
+    else {
+      dangerous.SetActive(false);
+    }
   }
 }

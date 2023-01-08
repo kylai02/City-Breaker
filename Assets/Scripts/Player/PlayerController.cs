@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour {
   public GameObject attackSpawn;
   public GameObject fistPrefab;
 
+  [Header("Audio Source")]
+  public AudioSource jumpSound;
+
   // Start is called before the first frame update
   void Start() {
     _verticalVelocity = new Vector3(0f, 0f, 0f);
@@ -76,6 +79,7 @@ public class PlayerController : MonoBehaviour {
       _verticalVelocity.y = -2f;
     }
     if (Input.GetKeyDown(jumpKey) && isGrounded) {
+      jumpSound.Play();
       _verticalVelocity.y += Mathf.Sqrt(jumpHeight * 2 * gravity);
     }
 

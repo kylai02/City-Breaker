@@ -134,6 +134,10 @@ abstract class Building : MonoBehaviour {
   protected void Survive() {
     if (!_died && health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
+      if (_tier == 1) {
+        GameObject.Find("GameManager").GetComponent<GameManager>().AlertCounterChange(-1);
+      }
+
       if (onFire) {
         _died = true;
         Explosion();
