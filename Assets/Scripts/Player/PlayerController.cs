@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
   public GameManager gamemanager;
   public Transform orientation;
   public CharacterController controller;
+  public Animator animator;
 
   [Header("Keybinds")]
   public KeyCode jumpKey = KeyCode.Space;
@@ -56,6 +57,10 @@ public class PlayerController : MonoBehaviour {
 
     _horizontalInput = Input.GetAxisRaw("Horizontal");
     _verticalInput = Input.GetAxisRaw("Vertical");
+
+    if (_horizontalInput != 0 || _verticalInput != 0) {
+      animator.SetTrigger("Walk-Trigger");
+    }
 
     _moveDirection = 
       orientation.forward * _verticalInput + 

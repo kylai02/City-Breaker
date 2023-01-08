@@ -42,7 +42,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._DissolveAmount
-    path: building_T4
+    path: low poly
     classID: 23
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -54,7 +54,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1286170456
+      path: 2153481566
       attribute: 2304829741
       script: {fileID: 0}
       typeID: 23
@@ -107,7 +107,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: material._DissolveAmount
-    path: building_T4
+    path: low poly
     classID: 23
     script: {fileID: 0}
   m_EulerEditorCurves: []

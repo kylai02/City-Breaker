@@ -9,6 +9,7 @@ abstract class BasicSkill : MonoBehaviour {
   public GameManager gameManager;
   public SkillSystem skillSystem;
   public Image cooldownCover;
+  public Animator animator;
 
   [Header("Settings")]
   public KeyCode attackKey = KeyCode.F;
@@ -36,6 +37,7 @@ abstract class BasicSkill : MonoBehaviour {
       readyToUse &&
       unlocked
     ) {
+      animator.SetTrigger("Attack-Trigger");
       UseSkill();
     }
 
