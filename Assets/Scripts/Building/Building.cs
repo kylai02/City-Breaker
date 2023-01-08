@@ -5,11 +5,13 @@ using DG.Tweening;
 
 abstract class Building : MonoBehaviour {
   [Header("References")]
-  public GameObject nextStage;
+  public GameObject nextStage1;
+  public GameObject nextStage2;
   public GameObject wholeObject;
   public GameObject fractureObject;
   public GameObject fireEffect;
   public GameObject corrodeEffect;
+  public Animator animator;
 
   [Header("Settings")]
   public float defaultHealth;
@@ -133,8 +135,14 @@ abstract class Building : MonoBehaviour {
     if (!_died && health <= 0) {
       GameObject.Find("GameManager").GetComponent<GameManager>().AddExperience(experience);
       if (onFire) {
+        _died = true;
         Explosion();
         Destroy(wholeObject, 3f);
+      }
+      else if (onCorrode) {
+        _died = true;
+        animator.SetTrigger("Dissolve-Trigger");
+        Destroy(wholeObject, 1f);
       }
       else {
         _died = true;
@@ -189,13 +197,21 @@ abstract class Building : MonoBehaviour {
       // Prevent to get double experience
       experience = 0;
 
-      nextStage = Instantiate(nextStage, transform.position, transform.rotation);
+      bool upgradePre = Random.Range(0, 2) == 0;
+      GameObject nextStage = Instantiate(
+        upgradePre ? nextStage1 : nextStage2,
+        transform.position, 
+        nextStage1.transform.rotation
+      );
+      Debug.Log(nextStage.name);
+      Building nextStageBuilding = nextStage.transform.GetChild(0).GetComponent<Building>();
 
       // Set nextStage's health to the remain health of this building
-      nextStage.GetComponent<Building>().DealDmg(defaultHealth - health, false);
+      nextStageBuilding.DealDmg(defaultHealth - health, false);
       if (onFire) {
-        nextStage.GetComponent<Building>().SetOnFire(fireTimer);
+        nextStageBuilding.SetOnFire(fireTimer);
       }
+
       Destroy(wholeObject);
     }
   }
