@@ -6,8 +6,10 @@ class FanFlame : BasicSkill {
   [Header("FanFlame")]
   public GameObject fanFlame;
   public float attackDuration;
+  public AudioSource fanFlameSound;
 
   public override void UseSkill() {
+    fanFlameSound.Play();
     readyToUse = false;
 
     fanFlame.SetActive(true);
@@ -15,6 +17,7 @@ class FanFlame : BasicSkill {
   }
 
   private void CloseFanFlame() {
+    fanFlameSound.Stop();
     coolDownTimer = coolDown;
     fanFlame.SetActive(false);
     Invoke(nameof(ResetUse), coolDown);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class AcidCloudAddon : MonoBehaviour {
   [Header("References")]
   public CharacterController controller;
+  public AudioSource rainSound;
 
   [Header("Settings")]
   public LayerMask buildingLayer;
@@ -13,6 +14,7 @@ public class AcidCloudAddon : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
+    rainSound.Play();
     InvokeRepeating(nameof(ChangeForward), 5f, 5f);
   }
 
