@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 abstract class Building : MonoBehaviour {
@@ -162,7 +163,7 @@ abstract class Building : MonoBehaviour {
       if (onFire) {
         _died = true;
         Explosion();
-        Destroy(wholeObject, 3f);
+        Destroy(wholeObject, 5f);
       }
       else if (onCorrode) {
         _died = true;
@@ -193,6 +194,7 @@ abstract class Building : MonoBehaviour {
       corrodeEffect.SetActive(false);
       fractureObject.SetActive(true);
       
+      CoroutineManager coroutineManager = FindObjectOfType<CoroutineManager>();
       foreach (Transform chip in fractureObject.transform) {
         var rb = chip.GetComponent<Rigidbody>();
 
@@ -202,7 +204,7 @@ abstract class Building : MonoBehaviour {
           isUpgrade ? sputteringRadius * 2 : sputteringRadius
         );
 
-        // StartCoroutine(Shrink(chip, 2));
+        coroutineManager.StartShrink(chip, 0.5f);
       }
     }
     
@@ -244,19 +246,4 @@ abstract class Building : MonoBehaviour {
   }
 
   protected abstract void CheckTier();
-
-  // IEnumerable Shrink(Transform t, float delay)
-  // {
-  //   yield return new WaitForSeconds(delay);
-
-  //   Vector3 newScale = t.localScale;
-
-  //   while (newScale.x >= 0)
-  //   {
-  //     newScale -= new Vector3(1f, 1f, 1f);
-
-  //     t.localScale = newScale;
-  //     yield return new WaitForSeconds(0.05f);
-  //   }
-  // }
 }
