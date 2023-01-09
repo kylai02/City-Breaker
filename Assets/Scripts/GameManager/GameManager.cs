@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
   public GameObject inGame;
   public GameObject pauseGame;
   public GameObject gameOver;
+  public GameObject success;
 
   // Text of levelNum, on the experienceBar 
   public TMP_Text levelText;
@@ -65,6 +66,8 @@ public class GameManager : MonoBehaviour {
 
     skillSystem.OnSkillUnlocked += SkillSystem_OnSkillUnlocked;
     // GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
+
+    InvokeRepeating(nameof(SuccessCheck), 1f, 1f);
   }
 
   // Update is called once per frame
@@ -309,6 +312,18 @@ public class GameManager : MonoBehaviour {
     }
     else {
       dangerous.SetActive(false);
+    }
+  }
+
+  private void SuccessCheck() {
+    if (!FindObjectOfType<Building>()) {
+      success.SetActive(true);
+      inGame.SetActive(false);
+      FindObjectOfType<AudioManager>().Play("Success");
+      Tweener tweener = success.transform.GetChild(1).DOScale(1f, 0.5f);
+      tweener.SetUpdate(true);
+
+      PauseToggle();
     }
   }
 }
