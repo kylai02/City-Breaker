@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
   public GameObject pauseGame;
   public GameObject gameOver;
   public GameObject success;
+  public TMP_Text fps;
 
   // Text of levelNum, on the experienceBar 
   public TMP_Text levelText;
@@ -103,13 +104,19 @@ public class GameManager : MonoBehaviour {
       AddExperience(1000);
     }
 
+    SetLevelSystem();
+    SetAlert();
 
+    // Golden Finger
     if (Input.GetKeyDown(KeyCode.L)) {
       GameOver();
     }
 
-    SetLevelSystem();
-    SetAlert();
+    fps.text = (1f / Time.deltaTime).ToString("0") + " FPS";
+    if (Input.GetKeyDown(KeyCode.U)) {
+      SetFPS();
+    }
+
   }
 
   public void ChangeSkill(int parameter) {
@@ -324,6 +331,15 @@ public class GameManager : MonoBehaviour {
       tweener.SetUpdate(true);
 
       PauseToggle();
+    }
+  }
+
+  private void SetFPS() {
+    if (fps.gameObject.activeInHierarchy) {
+      fps.gameObject.SetActive(false); 
+    }
+    else {
+      fps.gameObject.SetActive(true);
     }
   }
 }

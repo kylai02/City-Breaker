@@ -52,6 +52,8 @@ abstract class Building : MonoBehaviour {
   [Header("Health Bar")]
   public GameObject healthBarUI;
   public Slider slider;
+  private float _healthBarTimer;
+  private bool _healthBarTimeout;
   
   private bool _died;
   
@@ -61,6 +63,7 @@ abstract class Building : MonoBehaviour {
     _initPos = transform.localPosition;
     CheckTier();
     _timer = 0;
+    _healthBarTimer = -1;
   }
 
   // Update is called once per frame
@@ -75,12 +78,22 @@ abstract class Building : MonoBehaviour {
     SetHealthBar();
   }
 
+  void LateUpdate() {
+    healthBarUI.transform.LookAt(
+      healthBarUI.transform.position + Camera.main.transform.rotation * Vector3.forward,
+      Camera.main.transform.rotation * Vector3.up
+    );
+  }
+
   public void DealDmg(float dmg, bool shake) {
     health -= dmg;
     
     if (shake) {
       _shakeTimer = shakeTime;
     }
+
+    _healthBarTimer = 2f;
+    healthBarUI.SetActive(true);
   }
 
   public void SetOnFire(float onFireTime) {
@@ -253,6 +266,12 @@ abstract class Building : MonoBehaviour {
 
   protected void SetHealthBar() {
     slider.value = health / defaultHealth;
+    
+    if (_healthBarTimer < 0) {
+      healthBarUI.SetActive(false);
+    } else {
+      _healthBarTimer -= Time.deltaTime;
+    }
   }
 
   protected abstract void CheckTier();
