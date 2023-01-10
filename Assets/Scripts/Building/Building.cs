@@ -48,6 +48,10 @@ abstract class Building : MonoBehaviour {
   public float corrodeTimer;
   public float fireTimer;
   public float fireDamage;
+
+  [Header("Health Bar")]
+  public GameObject healthBarUI;
+  public Slider slider;
   
   private bool _died;
   
@@ -67,6 +71,8 @@ abstract class Building : MonoBehaviour {
 
     Survive();
     Upgrade();
+
+    SetHealthBar();
   }
 
   public void DealDmg(float dmg, bool shake) {
@@ -243,6 +249,10 @@ abstract class Building : MonoBehaviour {
 
       Destroy(wholeObject);
     }
+  }
+
+  protected void SetHealthBar() {
+    slider.value = health / defaultHealth;
   }
 
   protected abstract void CheckTier();
