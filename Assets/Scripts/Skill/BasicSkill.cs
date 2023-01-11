@@ -33,7 +33,7 @@ abstract class BasicSkill : MonoBehaviour {
   // Update is called once per frame
   void Update() {
     if (skillNumber == gameManager.chosenSkill && 
-      Input.GetKeyDown(attackKey) &&
+      Input.GetMouseButton(0) &&
       readyToUse &&
       unlocked
     ) {

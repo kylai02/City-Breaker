@@ -304,11 +304,11 @@ public class GameManager : MonoBehaviour {
 
   // Set level num UI
   private void SetLevelNumber(int levelNumber) {
-    levelText.text = "LEVEL " + (levelNumber + 1);
+    levelText.text = (levelNumber + 1).ToString();
   }
 
   private void SetExperienceNumber(int experience, int experienceToNextLevel) {
-    experienceNum.text = experience + "/" + experienceToNextLevel;
+    experienceNum.text = experience + " / " + experienceToNextLevel;
   }
 
   private void Restart() {

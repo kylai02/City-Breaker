@@ -17,7 +17,7 @@ public class SkillSystem {
     AcidCloud, 
     FanFlame, 
     FireLaser, 
-    ExplosionRangeDouble, // TODO
+    ExplosionRangeDouble,
     FistDamageDouble,
     FireCooldownDecrease,
     FireLaserRangeDouble,

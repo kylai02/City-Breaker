@@ -713,7 +713,7 @@ MonoBehaviour:
   normalDestroySound: {fileID: 8818263007070444140}
   defaultHealth: 500
   health: 500
-  countdown: 10
+  countdown: 90
   experience: 500
   shakeTime: 0.5
   shakeAmount: 0.1

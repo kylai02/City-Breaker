@@ -5,6 +5,7 @@ using UnityEngine;
 class AcidBomb : BasicSkill {
   [Header("AcidBomb")]
   public GameObject acidBombPrefab;
+  public GameObject orientation;
   public Transform cam;
   public float throwForce;
   public float throwUpwardForce;
