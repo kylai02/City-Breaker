@@ -11,7 +11,6 @@ abstract class Building : MonoBehaviour {
   public GameObject wholeObject;
   public GameObject fractureObject;
   public GameObject fireEffect;
-  public GameObject corrodeEffect;
   public GameObject upgradeEffect;
   public Animator animator;
 
@@ -128,7 +127,6 @@ abstract class Building : MonoBehaviour {
     if (corrodeTimer <= 0) {
       animator.SetBool("Dissolve", false);
       onCorrode = false;
-      corrodeEffect.SetActive(false);
       if (dissolvingSound.isPlaying) {
         dissolvingSound.Stop();
       }
@@ -188,7 +186,6 @@ abstract class Building : MonoBehaviour {
         Destroy(wholeObject, 5f);
       }
       else if (onCorrode) {
-        corrodeEffect.SetActive(false);
         animator.SetTrigger("Dissolve-Trigger");
         Destroy(wholeObject, 1f);
       }
@@ -211,7 +208,6 @@ abstract class Building : MonoBehaviour {
 
     gameObject.SetActive(false);
     fireEffect.SetActive(false);
-    corrodeEffect.SetActive(false);
 
     if (fractureObject) {
       fractureObject.SetActive(true);
