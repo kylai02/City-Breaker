@@ -11,7 +11,9 @@ class Fist : BasicSkill {
   public float damage;
  
   public override void UseSkill() {
-    punchSource.Play();
+    if (!punchSource.isPlaying) {
+      punchSource.Play();
+    }
     readyToUse = false;
     coolDownTimer = coolDown;
 

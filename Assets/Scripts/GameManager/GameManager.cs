@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour {
   [Header("UI References")]
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour {
   public GameObject gameOver;
   public GameObject success;
   public TMP_Text fps;
+
+  public GameObject cam;
+  public GameObject gameOverCam;
 
   // Text of levelNum, on the experienceBar 
   public TMP_Text levelText;
@@ -51,13 +55,10 @@ public class GameManager : MonoBehaviour {
   
   private int _eggCtr = 0;
 
-  void Awake() {
-    FindObjectOfType<AudioManager>().Play("BGM");
-  }
-
-
   // Start is called before the first frame update
   void Start() {
+    FindObjectOfType<AudioManager>().Play("BGM");
+
     Restart();
     _alertTimer = 0;
     _alertCounter = 0;
@@ -109,6 +110,22 @@ public class GameManager : MonoBehaviour {
       ChangeSkill(1);
     }
 
+    if (Input.GetKeyDown(KeyCode.Alpha1)) {
+      ChangeSkill(0, 0);
+    }
+    else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+      ChangeSkill(0, 1);
+    }
+    else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+      ChangeSkill(0, 2);
+    }
+    else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+      ChangeSkill(0, 3);
+    }
+    else if (Input.GetKeyDown(KeyCode.Alpha5)) {
+      ChangeSkill(0, 4);
+    }
+
     if (Input.GetKeyDown(KeyCode.R)) {
       AddExperience(1000);
     }
@@ -118,7 +135,7 @@ public class GameManager : MonoBehaviour {
 
     // Golden Finger
     if (Input.GetKeyDown(KeyCode.L)) {
-      GameOver();
+      GameOver(transform);
     }
 
     fps.text = (1f / Time.deltaTime).ToString("0") + " FPS";
@@ -128,9 +145,12 @@ public class GameManager : MonoBehaviour {
 
   }
 
-  public void ChangeSkill(int parameter) {
+  public void ChangeSkill(int parameter, int directive=-1) {
     int preSkill = chosenSkill;
     chosenSkill += parameter;
+    if (directive != -1) {
+      chosenSkill = directive;
+    }
 
     if (chosenSkill > 4) chosenSkill = 0;
     if (chosenSkill < 0) chosenSkill = 4;
@@ -169,14 +189,32 @@ public class GameManager : MonoBehaviour {
     CursorToggle();
   }
 
-  public void GameOver() {
-    gameOver.SetActive(true);
+  public void GameOver(Transform t0) {
+    PauseToggle();
+
     inGame.SetActive(false);
+    StartCoroutine(LookT0(t0));
+  }
+
+  IEnumerator LookT0(Transform t0) {
+    var reference = gameOverCam.GetComponent<CinemachineFreeLook>();
+    reference.Follow = t0;
+    reference.LookAt = t0;
+
+    cam.SetActive(false);
+    gameOverCam.SetActive(true);
+
+    for (int i = 0; i < 360; ++i) {
+      reference.m_XAxis.Value++;
+
+      yield return new WaitForSecondsRealtime(0.01f);
+    }
+
+    gameOver.SetActive(true);
+    FindObjectOfType<AudioManager>().Stop("BGM");
     FindObjectOfType<AudioManager>().Play("GameOver");
     Tweener tweener = gameOver.transform.GetChild(1).DOScale(2f, 0.5f);
     tweener.SetUpdate(true);
-
-    PauseToggle();
   }
 
   public void AlertCounterChange(int offset) {

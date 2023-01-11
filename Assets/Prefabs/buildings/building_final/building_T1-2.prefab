@@ -292,12 +292,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a9b2c086bcee94fb92d56e584673b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStage1: {fileID: 0}
-  nextStage2: {fileID: 0}
+  nextStage1: {fileID: 804424158990128923, guid: 82ec287c589650345a3579a0d8ccb5ad, type: 3}
+  nextStage2: {fileID: 804424158990128923, guid: 82ec287c589650345a3579a0d8ccb5ad, type: 3}
   wholeObject: {fileID: 1881515125270852553}
   fractureObject: {fileID: 4309191688032669716}
   fireEffect: {fileID: 3575071303710682645}
-  corrodeEffect: {fileID: 2996747471962372858}
   upgradeEffect: {fileID: 4436635026582427169}
   animator: {fileID: 3601443841827765106}
   burningSound: {fileID: 1293644520301633086}

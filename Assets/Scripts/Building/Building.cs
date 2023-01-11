@@ -252,11 +252,13 @@ abstract class Building : MonoBehaviour {
         nextStage1.transform.rotation
       );
       Building nextStageBuilding = nextStage.transform.GetChild(0).GetComponent<Building>();
-
-      // Set nextStage's health to the remain health of this building
-      nextStageBuilding.DealDmg(defaultHealth - health, false);
-      if (onFire) {
-        nextStageBuilding.SetOnFire(fireTimer);
+      
+      if (_tier != 1) {
+        // Set nextStage's health to the remain health of this building
+        nextStageBuilding.DealDmg(defaultHealth - health, false);
+        if (onFire) {
+          nextStageBuilding.SetOnFire(fireTimer);
+        }
       }
 
       Destroy(wholeObject);
