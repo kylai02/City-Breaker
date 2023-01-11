@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour {
   public GameObject dangerous;
   public TMP_Text alertCounterUI;
 
+  public Sprite[] sprites;
+  public GameObject[] choosenObj;
+
   public int chosenSkill;
 
   [Header("System Info")]
@@ -270,7 +273,16 @@ public class GameManager : MonoBehaviour {
         }
         else {
           _chosenArea[i] = n;
-          chooseSkill.transform.GetChild(i).GetChild(0).GetComponent<TMP_Text>().text = n.ToString();
+          GameObject button = choosenObj[i];
+
+          int index = 2 * (n - 3);
+          button.GetComponent<Image>().sprite = sprites[index];
+          SpriteState ss = new SpriteState();
+          ss.highlightedSprite = sprites[index + 1];
+          ss.pressedSprite = sprites[index + 1];
+          ss.disabledSprite = sprites[index + 1];
+          button.GetComponent<Button>().spriteState = ss;
+
           gotNum = true;
         }
       }
