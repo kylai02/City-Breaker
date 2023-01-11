@@ -109,7 +109,9 @@ abstract class Building : MonoBehaviour {
   public void SetOnCorrode(float onCorrodeTime) {
     onCorrode = true;
     corrodeTimer = onCorrodeTime;
-    animator.SetBool("Dissolve", true);
+    if (!animator.GetBool("Dissolve")) {
+      animator.SetBool("Dissolve", true);
+    }
   }
 
   protected void OnCorrodeCheck() {
