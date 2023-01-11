@@ -892,12 +892,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a9b2c086bcee94fb92d56e584673b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStage1: {fileID: 0}
-  nextStage2: {fileID: 0}
+  nextStage1: {fileID: 804424158990128923, guid: 82ec287c589650345a3579a0d8ccb5ad, type: 3}
+  nextStage2: {fileID: 804424158990128923, guid: 82ec287c589650345a3579a0d8ccb5ad, type: 3}
   wholeObject: {fileID: 7997625649781305511}
   fractureObject: {fileID: 6989683072496246095}
   fireEffect: {fileID: 2491269095082288318}
-  corrodeEffect: {fileID: 7865853570446871963}
   upgradeEffect: {fileID: 2207481190133330870}
   animator: {fileID: 2247831072192197762}
   burningSound: {fileID: 698251319991104839}

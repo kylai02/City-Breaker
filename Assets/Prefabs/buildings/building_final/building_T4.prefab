@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af5a7df55f4a764e8ca1970f31047ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextStage1: {fileID: 3689954665720084462, guid: a4f51edc5648d4faca9bc7eb5221339a, type: 3}
+  nextStage1: {fileID: 7154721105932806893, guid: d2b93b63ae93d454bbb507cd0e496076, type: 3}
   nextStage2: {fileID: 3689954665720084462, guid: a4f51edc5648d4faca9bc7eb5221339a, type: 3}
   wholeObject: {fileID: 2930840913060828955}
   fractureObject: {fileID: 3773953353261421435}
