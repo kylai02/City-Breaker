@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 abstract class Building : MonoBehaviour {
@@ -18,6 +19,7 @@ abstract class Building : MonoBehaviour {
   public AudioSource burningSound;
   public AudioSource dissolvingSound;
   public AudioClip explosionSound;
+  public AudioSource normalDestroySound;
 
   [Header("Settings")]
   public float defaultHealth;
@@ -47,6 +49,12 @@ abstract class Building : MonoBehaviour {
   public float corrodeTimer;
   public float fireTimer;
   public float fireDamage;
+
+  [Header("Health Bar")]
+  public GameObject healthBarUI;
+  public Slider slider;
+  private float _healthBarTimer;
+  private bool _healthBarTimeout;
   
   private bool _died;
   
@@ -56,6 +64,7 @@ abstract class Building : MonoBehaviour {
     _initPos = transform.localPosition;
     CheckTier();
     _timer = 0;
+    _healthBarTimer = -1;
   }
 
   // Update is called once per frame
@@ -66,6 +75,15 @@ abstract class Building : MonoBehaviour {
 
     Survive();
     Upgrade();
+
+    SetHealthBar();
+  }
+
+  void LateUpdate() {
+    healthBarUI.transform.LookAt(
+      healthBarUI.transform.position + Camera.main.transform.rotation * Vector3.forward,
+      Camera.main.transform.rotation * Vector3.up
+    );
   }
 
   public void DealDmg(float dmg, bool shake) {
@@ -74,6 +92,9 @@ abstract class Building : MonoBehaviour {
     if (shake) {
       _shakeTimer = shakeTime;
     }
+
+    _healthBarTimer = 2f;
+    healthBarUI.SetActive(true);
   }
 
   public void SetOnFire(float onFireTime) {
@@ -162,7 +183,7 @@ abstract class Building : MonoBehaviour {
       if (onFire) {
         _died = true;
         Explosion();
-        Destroy(wholeObject, 3f);
+        Destroy(wholeObject, 5f);
       }
       else if (onCorrode) {
         _died = true;
@@ -172,6 +193,7 @@ abstract class Building : MonoBehaviour {
       }
       else {
         _died = true;
+        normalDestroySound.Play();
         transform.DOLocalMoveY(-8, 5);
         Destroy(wholeObject, 5f);
       }
@@ -193,6 +215,7 @@ abstract class Building : MonoBehaviour {
       corrodeEffect.SetActive(false);
       fractureObject.SetActive(true);
       
+      CoroutineManager coroutineManager = FindObjectOfType<CoroutineManager>();
       foreach (Transform chip in fractureObject.transform) {
         var rb = chip.GetComponent<Rigidbody>();
 
@@ -202,7 +225,7 @@ abstract class Building : MonoBehaviour {
           isUpgrade ? sputteringRadius * 2 : sputteringRadius
         );
 
-        // StartCoroutine(Shrink(chip, 2));
+        coroutineManager.StartShrink(chip, 0.5f);
       }
     }
     
@@ -243,20 +266,15 @@ abstract class Building : MonoBehaviour {
     }
   }
 
+  protected void SetHealthBar() {
+    slider.value = health / defaultHealth;
+    
+    if (_healthBarTimer < 0) {
+      healthBarUI.SetActive(false);
+    } else {
+      _healthBarTimer -= Time.deltaTime;
+    }
+  }
+
   protected abstract void CheckTier();
-
-  // IEnumerable Shrink(Transform t, float delay)
-  // {
-  //   yield return new WaitForSeconds(delay);
-
-  //   Vector3 newScale = t.localScale;
-
-  //   while (newScale.x >= 0)
-  //   {
-  //     newScale -= new Vector3(1f, 1f, 1f);
-
-  //     t.localScale = newScale;
-  //     yield return new WaitForSeconds(0.05f);
-  //   }
-  // }
 }

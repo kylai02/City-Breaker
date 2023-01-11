@@ -13,6 +13,8 @@ class T1 : Building {
     Survive();
     ShowDangerous();
     Upgrade();
+
+    SetHealthBar();
   }
 
   protected override void CheckTier() {

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
   public GameObject inGame;
   public GameObject pauseGame;
   public GameObject gameOver;
+  public GameObject success;
+  public TMP_Text fps;
 
   // Text of levelNum, on the experienceBar 
   public TMP_Text levelText;
@@ -45,6 +47,12 @@ public class GameManager : MonoBehaviour {
   private List<int> _chosenArea;
   
   private int _eggCtr = 0;
+
+  void Awake() {
+    FindObjectOfType<AudioManager>().Play("BGM");
+  }
+
+
   // Start is called before the first frame update
   void Start() {
     Restart();
@@ -65,6 +73,8 @@ public class GameManager : MonoBehaviour {
 
     skillSystem.OnSkillUnlocked += SkillSystem_OnSkillUnlocked;
     // GameObject.Find("Skill " + chosenSkill).GetComponent<SkillIcon>().BeChosen();
+
+    InvokeRepeating(nameof(SuccessCheck), 1f, 1f);
   }
 
   // Update is called once per frame
@@ -100,13 +110,19 @@ public class GameManager : MonoBehaviour {
       AddExperience(1000);
     }
 
+    SetLevelSystem();
+    SetAlert();
 
+    // Golden Finger
     if (Input.GetKeyDown(KeyCode.L)) {
       GameOver();
     }
 
-    SetLevelSystem();
-    SetAlert();
+    fps.text = (1f / Time.deltaTime).ToString("0") + " FPS";
+    if (Input.GetKeyDown(KeyCode.U)) {
+      SetFPS();
+    }
+
   }
 
   public void ChangeSkill(int parameter) {
@@ -309,6 +325,27 @@ public class GameManager : MonoBehaviour {
     }
     else {
       dangerous.SetActive(false);
+    }
+  }
+
+  private void SuccessCheck() {
+    if (!FindObjectOfType<Building>()) {
+      success.SetActive(true);
+      inGame.SetActive(false);
+      FindObjectOfType<AudioManager>().Play("Success");
+      Tweener tweener = success.transform.GetChild(1).DOScale(1f, 0.5f);
+      tweener.SetUpdate(true);
+
+      PauseToggle();
+    }
+  }
+
+  private void SetFPS() {
+    if (fps.gameObject.activeInHierarchy) {
+      fps.gameObject.SetActive(false); 
+    }
+    else {
+      fps.gameObject.SetActive(true);
     }
   }
 }
