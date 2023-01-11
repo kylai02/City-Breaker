@@ -60,6 +60,7 @@ abstract class Building : MonoBehaviour {
   
   // Start is called before the first frame update
   void Start() {
+    countdown += Random.Range(0f, 30f);
     _isShaking = false;
     _initPos = transform.localPosition;
     CheckTier();
@@ -108,8 +109,8 @@ abstract class Building : MonoBehaviour {
   public void SetOnCorrode(float onCorrodeTime) {
     onCorrode = true;
     corrodeTimer = onCorrodeTime;
-    if (corrodeEffect) {
-      corrodeEffect.SetActive(true);
+    if (!animator.GetBool("Dissolve")) {
+      animator.SetBool("Dissolve", true);
     }
   }
 
@@ -125,6 +126,7 @@ abstract class Building : MonoBehaviour {
     }
 
     if (corrodeTimer <= 0) {
+      animator.SetBool("Dissolve", false);
       onCorrode = false;
       corrodeEffect.SetActive(false);
       if (dissolvingSound.isPlaying) {
@@ -180,19 +182,17 @@ abstract class Building : MonoBehaviour {
         GameObject.Find("GameManager").GetComponent<GameManager>().AlertCounterChange(-1);
       }
 
+      _died = true;
       if (onFire) {
-        _died = true;
         Explosion();
         Destroy(wholeObject, 5f);
       }
       else if (onCorrode) {
-        _died = true;
         corrodeEffect.SetActive(false);
         animator.SetTrigger("Dissolve-Trigger");
         Destroy(wholeObject, 1f);
       }
       else {
-        _died = true;
         normalDestroySound.Play();
         transform.DOLocalMoveY(-8, 5);
         Destroy(wholeObject, 5f);
@@ -209,10 +209,11 @@ abstract class Building : MonoBehaviour {
 
     AudioSource.PlayClipAtPoint(explosionSound, transform.position);
 
+    gameObject.SetActive(false);
+    fireEffect.SetActive(false);
+    corrodeEffect.SetActive(false);
+
     if (fractureObject) {
-      gameObject.SetActive(false);
-      fireEffect.SetActive(false);
-      corrodeEffect.SetActive(false);
       fractureObject.SetActive(true);
       
       CoroutineManager coroutineManager = FindObjectOfType<CoroutineManager>();
@@ -269,7 +270,10 @@ abstract class Building : MonoBehaviour {
   protected void SetHealthBar() {
     slider.value = health / defaultHealth;
     
-    if (_healthBarTimer < 0) {
+    if (_died) {
+      healthBarUI.SetActive(false);
+    }
+    else if (_healthBarTimer < 0) {
       healthBarUI.SetActive(false);
     } else {
       _healthBarTimer -= Time.deltaTime;

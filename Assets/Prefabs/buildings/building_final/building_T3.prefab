@@ -161,7 +161,7 @@ MonoBehaviour:
   upgradeExplosionEffect: {fileID: 5817101414626847123, guid: f904f3f74e8be924eb02efbb99247209, type: 3}
   sputteringRadius: 3
   sputteringDamege: 100
-  explosionForce: 0
+  explosionForce: 500
   onCorrode: 0
   onFire: 0
   corrodeTimer: 0
