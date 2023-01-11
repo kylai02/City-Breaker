@@ -47,6 +47,12 @@ public class GameManager : MonoBehaviour {
   private List<int> _chosenArea;
   
   private int _eggCtr = 0;
+
+  void Awake() {
+    FindObjectOfType<AudioManager>().Play("BGM");
+  }
+
+
   // Start is called before the first frame update
   void Start() {
     Restart();

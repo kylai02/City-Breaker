@@ -19,6 +19,7 @@ abstract class Building : MonoBehaviour {
   public AudioSource burningSound;
   public AudioSource dissolvingSound;
   public AudioClip explosionSound;
+  public AudioSource normalDestroySound;
 
   [Header("Settings")]
   public float defaultHealth;
@@ -192,6 +193,7 @@ abstract class Building : MonoBehaviour {
       }
       else {
         _died = true;
+        normalDestroySound.Play();
         transform.DOLocalMoveY(-8, 5);
         Destroy(wholeObject, 5f);
       }
