@@ -225,6 +225,7 @@ MonoBehaviour:
   fractureObject: {fileID: 3773953353261421435}
   fireEffect: {fileID: 8284140041249487336}
   upgradeEffect: {fileID: 0}
+  ruin: {fileID: 0}
   animator: {fileID: 9142816879789675163}
   burningSound: {fileID: 7122078953303063043}
   dissolvingSound: {fileID: 2497220979319297865}

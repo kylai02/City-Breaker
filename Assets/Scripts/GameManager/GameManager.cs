@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
   public GameObject pauseGame;
   public GameObject gameOver;
   public GameObject success;
+  public Image mask;
   public TMP_Text fps;
 
   public GameObject cam;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour {
 
   // Start is called before the first frame update
   void Start() {
+    StartCoroutine(FadeIn());
     FindObjectOfType<AudioManager>().Play("BGM");
 
     Restart();
@@ -413,5 +415,22 @@ public class GameManager : MonoBehaviour {
     else {
       fps.gameObject.SetActive(true);
     }
+  }
+
+  IEnumerator FadeIn() {
+    mask.gameObject.SetActive(true);
+    while (mask.color.a > 0) {
+      float a = mask.color.a;
+      a -= 0.025f;
+      if (a < 0) {
+        a = 0;
+      }
+
+      mask.color = new Color(mask.color.r, mask.color.g, mask.color.b, a);
+
+      yield return new WaitForSeconds(0.025f);
+    }
+
+    mask.gameObject.SetActive(false);
   }
 }
