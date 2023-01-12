@@ -12,6 +12,7 @@ abstract class Building : MonoBehaviour {
   public GameObject fractureObject;
   public GameObject fireEffect;
   public GameObject upgradeEffect;
+  public GameObject ruin;
   public Animator animator;
 
   [Header("Audio")]
@@ -181,20 +182,34 @@ abstract class Building : MonoBehaviour {
       }
 
       _died = true;
+      Vector3 pos = transform.position;
+      Quaternion rotate = transform.rotation;
+
       if (onFire) {
         Explosion();
         Destroy(wholeObject, 5f);
       }
       else if (onCorrode) {
         animator.SetTrigger("Dissolve-Trigger");
+        if (ruin) {
+          StartCoroutine(AddRuin(0.8f, pos, rotate));
+        }
         Destroy(wholeObject, 1f);
       }
       else {
         normalDestroySound.Play();
         transform.DOLocalMoveY(-8, 5);
+        if (ruin) {
+          StartCoroutine(AddRuin(1f, pos, rotate));
+        }
         Destroy(wholeObject, 5f);
       }
     }
+  }
+
+  IEnumerator AddRuin(float delay, Vector3 pos, Quaternion rotate) {
+    yield return new WaitForSeconds(delay);
+    Instantiate(ruin, pos, rotate);
   }
 
   protected void Explosion() {
