@@ -905,7 +905,7 @@ MonoBehaviour:
   normalDestroySound: {fileID: 6281566371319695916}
   defaultHealth: 1000
   health: 1000
-  countdown: 120
+  countdown: 60
   experience: 1000
   shakeTime: 0.5
   shakeAmount: 0.1
@@ -921,7 +921,7 @@ MonoBehaviour:
   onFire: 0
   corrodeTimer: 0
   fireTimer: 0
-  fireDamage: 20
+  fireDamage: 40
   healthBarUI: {fileID: 1420437410687821214}
   slider: {fileID: 7885229402922466235}
 --- !u!33 &3580210360516107530

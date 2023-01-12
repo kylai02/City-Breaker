@@ -44,7 +44,7 @@ public class AcidBombAddon : MonoBehaviour {
       else {
         targetBuilding.DealDmg(sputteringDamege, true);
       }
-      targetBuilding.SetOnCorrode(4f);
+      targetBuilding.SetOnCorrode(8f);
     }
     
     Destroy(effect, 2f);

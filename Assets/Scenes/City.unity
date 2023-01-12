@@ -7650,7 +7650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 5
-  damage: 200
+  damage: 400
   fireLaserEffect: {fileID: 4338113310788114471}
 --- !u!1001 &830168144
 PrefabInstance:
@@ -12239,67 +12239,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2930840913060828954, guid: a5f3a69883a644f8b99f938c024468c5, type: 3}
   m_PrefabInstance: {fileID: 1262673242}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1274805088
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.43
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1249657247160297843, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1881515125270852553, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: m_Name
-      value: building_T1-2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6691042446511113354, guid: 687e08456a601489895599ec4c071c09, type: 3}
-      propertyPath: countdown
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 687e08456a601489895599ec4c071c09, type: 3}
 --- !u!1001 &1284623319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19249,7 +19188,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f1c4d071d8230ee4b97fd93e7bba56b7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -19487,7 +19426,7 @@ MonoBehaviour:
   animator: {fileID: 5866666021290659071}
   jumpKey: 32
   moveSpeed: 7
-  sprintSpeed: 10
+  sprintSpeed: 20
   gravity: 19.8
   jumpHeight: 3
   velocity: {x: 0, y: 0, z: 0}
@@ -19533,7 +19472,7 @@ MonoBehaviour:
   cooldownCover: {fileID: 560908953}
   animator: {fileID: 5866666021290659071}
   attackKey: 102
-  coolDown: 0.25
+  coolDown: 0.5
   unlocked: 1
   skillNumber: 0
   fistPrefab: {fileID: 2764859624508936937, guid: 678ab4493a13dca4b94faf02ea44d9c4, type: 3}
@@ -19565,7 +19504,7 @@ MonoBehaviour:
   orientation: {fileID: 1151226259}
   cam: {fileID: 963194228}
   throwForce: 10
-  throwUpwardForce: 10
+  throwUpwardForce: 7
 --- !u!114 &2028610705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19633,7 +19572,7 @@ MonoBehaviour:
   unlocked: 0
   skillNumber: 4
   fireLaser: {fileID: 816281354}
-  attackDuration: 2
+  attackDuration: 4
   fireLaserSound: {fileID: 2028610710}
 --- !u!82 &2028610708
 AudioSource:

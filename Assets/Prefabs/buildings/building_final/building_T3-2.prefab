@@ -225,7 +225,6 @@ MonoBehaviour:
   wholeObject: {fileID: 3689954665720084462}
   fractureObject: {fileID: 8271549269330875436}
   fireEffect: {fileID: 7727730867848623648}
-  corrodeEffect: {fileID: 5918665801569333899}
   upgradeEffect: {fileID: 0}
   animator: {fileID: 5850729353210283041}
   burningSound: {fileID: 2369636009359401784}
@@ -250,7 +249,7 @@ MonoBehaviour:
   onFire: 0
   corrodeTimer: 0
   fireTimer: 0
-  fireDamage: 20
+  fireDamage: 40
   healthBarUI: {fileID: 8248533859749137944}
   slider: {fileID: 6225863624980377825}
 --- !u!33 &8498993547173314735

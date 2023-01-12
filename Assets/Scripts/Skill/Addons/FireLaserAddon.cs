@@ -30,12 +30,11 @@ public class FireLaserAddon : MonoBehaviour {
     ) && hit.collider.CompareTag("Building")) {
       Building targetBuilding = hit.collider.GetComponent<Building>();
       targetBuilding.DealDmg(damage * Time.deltaTime, true);
-      targetBuilding.SetOnFire(5f);
+      targetBuilding.SetOnFire(10f);
     }
   }
 
   public void RangeIncrease() {
-    Debug.Log("here");
     attackRange *= 2;
 
     var effectMain = fireLaserEffect.main;
