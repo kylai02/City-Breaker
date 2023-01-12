@@ -21,7 +21,7 @@ public class LevelSystem {
   }
 
   public void AddExperience(int amount) {
-    if (_level != 6) {
+    if (_level != 7) {
       _experience += amount;
 
       while (_experience >= _experienceToNextLevel) {
@@ -35,7 +35,7 @@ public class LevelSystem {
           _experienceToNextLevel = 10000;
         }
         
-        if (_level == 6) _experience = 0;
+        if (_level == 7) _experience = 0;
       }
     }
   }

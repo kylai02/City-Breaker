@@ -349,16 +349,32 @@ public class GameManager : MonoBehaviour {
 
   // Set exp bar UI
   private void SetExperienceBarSize(float experienceNormalized) {
-    experienceBar.fillAmount = experienceNormalized;
+    if (levelSystem.GetLevel() != 7) {
+      experienceBar.fillAmount = experienceNormalized;
+    }
+    else {
+      experienceBar.fillAmount = 1;
+    }
   }
 
   // Set level num UI
   private void SetLevelNumber(int levelNumber) {
-    levelText.text = (levelNumber + 1).ToString();
+    if (levelNumber == 7) {
+      levelText.fontSize = 30;
+      levelText.text = "MAX";
+    }
+    else {
+      levelText.text = (levelNumber + 1).ToString();
+    }
   }
 
   private void SetExperienceNumber(int experience, int experienceToNextLevel) {
-    experienceNum.text = experience + " / " + experienceToNextLevel;
+    if (levelSystem.GetLevel() != 7) {
+      experienceNum.text = experience + " / " + experienceToNextLevel;
+    }
+    else {
+      experienceNum.text = 10000 + " / " + 10000;
+    }
   }
 
   private void Restart() {

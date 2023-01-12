@@ -35,7 +35,8 @@ abstract class BasicSkill : MonoBehaviour {
     if (skillNumber == gameManager.chosenSkill && 
       Input.GetMouseButton(0) &&
       readyToUse &&
-      unlocked
+      unlocked &&
+      !gameManager.isPaused
     ) {
       animator.SetTrigger("Attack-Trigger");
       UseSkill();
