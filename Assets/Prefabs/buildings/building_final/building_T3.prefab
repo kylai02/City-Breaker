@@ -440,7 +440,7 @@ MonoBehaviour:
   onFire: 0
   corrodeTimer: 0
   fireTimer: 0
-  fireDamage: 20
+  fireDamage: 40
   healthBarUI: {fileID: 2859634961573960523}
   slider: {fileID: 4002354458602963093}
 --- !u!33 &2705972188607765932

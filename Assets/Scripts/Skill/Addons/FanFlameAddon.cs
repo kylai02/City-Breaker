@@ -38,7 +38,7 @@ public class FanFlameAddon : MonoBehaviour {
       attackRange
     ) && hit.collider.CompareTag("Building")) {
       Building targetBuilding = hit.collider.GetComponent<Building>();
-      targetBuilding.SetOnFire(5f);
+      targetBuilding.SetOnFire(10f);
     }
   }
 }
