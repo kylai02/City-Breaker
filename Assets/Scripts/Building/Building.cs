@@ -240,7 +240,7 @@ abstract class Building : MonoBehaviour {
     }
   }
 
-  protected void Upgrade() {
+  protected virtual void Upgrade() {
     if (_tier != 0 && _timer >= countdown) {
       // Prevent to get double experience
       experience = 0;
